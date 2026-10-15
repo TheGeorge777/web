@@ -190,6 +190,39 @@
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                                 fill="#ffffff">
                                 <path
+                                    d="M480-80 200-360l56-56 184 183v-647h80v647l184-183 56 56L480-80Z" />
+                            </svg>
+                            <a href="#speech-fija-masiva" class="nav__link">Speech Fija Masiva</a>
+                            <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%229%206%2015%2012%209%2018%22/%3E%3C/svg%3E"
+                                alt="Flecha" width="24" height="24" class="list__arrow">
+
+                        </div>
+
+                        <ul class="list__show">
+                            <li class="list__inside">
+                                <a href="#sf-pm3" class="nav__link nav__link--inside">1. Guion de Programación</a>
+                            </li>
+
+                            <li class="list__inside">
+                                <a href="#sf-reconfirmacion" class="nav__link nav__link--inside">2. Guion de Seguimiento</a>
+                            </li>
+
+                            <li class="list__inside">
+                                <a href="#sf-val-inst" class="nav__link nav__link--inside">3. Speech de Validación</a>
+                            </li>
+
+                            <li class="list__inside">
+                                <a href="#sf-reb-migracion" class="nav__link nav__link--inside">4. Rebates ante un rechazo</a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    <li class="list__item list__item--click">
+                        <div class="list__button list__button--click">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                fill="#ffffff">
+                                <path
                                     d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70h400q100 0 170 70t70 170q0 100-70 170t-170 70H280Zm400-120q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Z" />
                             </svg>
                             <a href="#activaciones" class="nav__link">Activaciones</a>
@@ -1360,6 +1393,454 @@
 
                 </div>
 
+            </section>
+
+            <section id="speech-fija-masiva">
+                <div class="container">
+                    <h2>Speech Fija Masiva</h2>
+
+                    <h3 style="margin-top:2rem;">1. Guion de Programación</h3>
+                    <div class="container__grid">
+                        <div class="container__grid__item">
+                            <div id="sf-pm3">
+                                <h3>1.1 PM3 - No confirmaron fecha</h3>
+                                <p>Clientes que no confirmaron fecha de instalación ni por WhatsApp ni por llamada.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> de parte del área de programación de Claro. ¿Me comunico con (Nombre del Titular, nombre completo)?<br>
+                                        <br>
+                                        Le llamamos porque intentamos comunicarnos con usted anteriormente sin éxito, respecto a su solicitud (Instalación, Post-venta, Migración). ¿Nos podría confirmar su disponibilidad para el día de hoy o mañana en el rango de (verificar disponibilidad de franja 9AM a 1pm o de 2PM a 6PM)?<br>
+                                        <br>
+                                        <b>El paquete contratado es:</b><br>
+                                        🔸 Internet (velocidad) y (cantidad) repetidor(es) (Validar si figura dentro del plan)<br>
+                                        🔸 (cantidad) decodificadores. Debe contar con el (los) televisor(es) para validar la señal de cable. (IMPORTANTE - 1 TV como mínimo para probar el servicio)<br>
+                                        🔸 Telefonía<br>
+                                        🔸 Liga 1MAX (Validar si figura dentro del plan)<br>
+                                        <br>
+                                        La Dirección para la instalación es: __________ en el distrito de __________.<br>
+                                        <br>
+                                        Si usted no estará presente, puede dejar a una persona mayor de edad para atender al técnico. Perfecto, su visita queda confirmada para el (fecha), en horario (9AM a 1pm / de 2PM a 6PM).<br>
+                                        <br>
+                                        Muchas gracias. ¡Que tenga un buen día!
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-d1-inst">
+                                <h3>1.2 D+1 - Instalaciones / Migraciones</h3>
+                                <p>Clientes que tienen instalación programada para el día siguiente y que no han confirmado por WhatsApp.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> de parte del área de programación de Claro. ¿Me comunico con (Nombre del Titular, nombre completo)? Le llamamos para confirmar su instalación/migración programada para el día de mañana (fecha), en horario (9AM a 1pm / de 2PM a 6PM). ¿Nos confirma su disponibilidad?<br>
+                                        <br>
+                                        <b>El paquete contratado es:</b><br>
+                                        🔸 Internet (velocidad) y (cantidad) repetidor(es) (Validar si figura dentro del plan)<br>
+                                        🔸 (cantidad) decodificadores. Debe contar con el (los) televisor(es) para validar la señal de cable. (IMPORTANTE - 1 TV como mínimo para probar el servicio)<br>
+                                        🔸 Telefonía<br>
+                                        🔸 Liga 1MAX (Validar si figura dentro del plan)<br>
+                                        <br>
+                                        La Dirección para la instalación es: __________ en el distrito de __________.<br>
+                                        <br>
+                                        Si usted no estará presente, puede dejar a una persona mayor de edad para atender al técnico. Perfecto, su visita queda confirmada para el (fecha), en horario (9AM a 1pm / de 2PM a 6PM).<br>
+                                        <br>
+                                        Muchas gracias. ¡Que tenga un buen día!
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-d1-pv">
+                                <h3>1.3 D+1 / PV Senior</h3>
+                                <p>Clientes que tienen su servicio de atención programada para el día siguiente y que no han confirmado por WhatsApp.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> del área de programación de Claro. ¿Me comunico con (Nombre del Titular, nombre completo)? Le llamamos por la solicitud de (TIPO DE POST-VENTA). Su visita está programada para el día de mañana (fecha) en la franja horaria de (9AM a 1pm / de 2PM a 6PM). ¿Nos confirma su disponibilidad?<br>
+                                        <br>
+                                        <b>En caso de tener servicio CATV:</b><br>
+                                        Me confirma si el decodificador solicitado es (indicar cantidad y modelo: HD, DVR, BASICO HD, IPTV).<br>
+                                        (Si es TRASLADO EXTERNO, validar si tiene los equipos en la nueva dirección. Si ya no los cuenta, aplicar proceso de rechazo e indicarle que debe llamar al 123 para reposición).<br>
+                                        <br>
+                                        La Dirección para la instalación es: __________ en el distrito de __________.<br>
+                                        <br>
+                                        Si usted no estará presente, puede dejar a una persona mayor de edad para atender al técnico. Perfecto, su visita queda confirmada para el (fecha), en horario (9AM a 1pm / de 2PM a 6PM).<br>
+                                        <br>
+                                        Muchas gracias. ¡Que tenga un buen día!
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-adelanto">
+                                <h3>1.4 Adelanto</h3>
+                                <p>Buscar clientes agendados a más de 2 días de programación para completar trabajos a los técnicos.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>, le saluda <span class="adp"></span> del área de programación de Claro. ¿Me comunico con (Nombre del titular)?<br>
+                                        <br>
+                                        Nos comunicamos respecto a su visita técnica programada para el día (fecha original). Sin embargo, contamos con una disponibilidad más cercana y queremos consultarle si desea adelantar la atención para el día (nueva fecha) en la franja horaria de (9AM a 1pm / de 2PM a 6PM). ¿Nos podría confirmar si tiene disponibilidad?<br>
+                                        <br>
+                                        De aceptar el adelanto, actualizaremos inmediatamente la programación. Le informamos que la tecnología a instalarse es: Fibra Coaxial / Fibra Óptica.<br>
+                                        <br>
+                                        <b>El paquete contratado es:</b><br>
+                                        🔸 Internet (velocidad) y (cantidad) repetidor(es) (Validar si figura dentro del plan)<br>
+                                        🔸 (cantidad) decodificadores. Debe contar con el (los) televisor(es) para validar la señal de cable. (IMPORTANTE - 1 TV como mínimo para probar el servicio)<br>
+                                        🔸 Telefonía<br>
+                                        🔸 Liga 1MAX (Validar si figura dentro del plan)<br>
+                                        <br>
+                                        La Dirección para la instalación es: __________ en el distrito de __________.<br>
+                                        <br>
+                                        Si usted no estará presente, puede dejar a una persona mayor de edad para atender al técnico. Perfecto, su visita queda confirmada para el (fecha), en horario (9AM a 1pm / de 2PM a 6PM).<br>
+                                        <br>
+                                        Muchas gracias. ¡Que tenga un buen día!
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-am0">
+                                <h3>1.5 AM0</h3>
+                                <p>Buscamos adelantar trabajos de instalación para el día siguiente en la franja de 7am a 9am.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> del área de programación de Claro. ¿Me comunico con (Nombre del Titular, nombre completo)? Nos comunicamos respecto a su visita técnica programada para el día (fecha original). Sin embargo, contamos con disponibilidad para el día de mañana entre 7 y 7:30am. ¿Nos podría confirmar si tiene disponibilidad para recibir a nuestro técnico? De aceptar la visita, actualizaremos inmediatamente la programación.<br>
+                                        <br>
+                                        <b>El paquete contratado es:</b><br>
+                                        🔸 Internet (velocidad) y (cantidad) repetidor(es) (Validar si figura dentro del plan)<br>
+                                        🔸 (cantidad) decodificadores. Debe contar con el (los) televisor(es) para validar la señal de cable. (IMPORTANTE - 1 TV como mínimo para probar el servicio)<br>
+                                        🔸 Telefonía<br>
+                                        🔸 Liga 1MAX (Validar si figura dentro del plan)<br>
+                                        <br>
+                                        La Dirección para la instalación es: __________ en el distrito de __________.<br>
+                                        <br>
+                                        Si usted no estará presente, puede dejar a una persona mayor de edad para atender al técnico. Perfecto, su visita queda confirmada para el (fecha), en horario (7 y 7:30am / 9AM a 1pm / de 2PM a 6PM).<br>
+                                        <br>
+                                        Muchas gracias. ¡Que tenga un buen día!
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-repro-auto">
+                                <h3>1.6 Reprogramación automática</h3>
+                                <p>Clientes a los que no llegamos en el día en que su instalación fue programada.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> del área de programación de Claro. ¿Me comunico con (Nombre del Titular, nombre completo)?<br>
+                                        <br>
+                                        Le llamamos por la visita técnica programada para el día (fecha original), le ofrecemos nuestras disculpas por no haber cumplido con la visita pactada.<br>
+                                        <br>
+                                        Quisiéramos coordinar con usted una nueva fecha para su visita. ¿Nos podría recibir el día de hoy / mañana en el rango horario (7 a 7:30am / 9AM a 1pm / de 2PM a 6PM)?<br>
+                                        <br>
+                                        <b>El paquete contratado es:</b><br>
+                                        🔸 Internet (velocidad) y (cantidad) repetidor(es) (Validar si figura dentro del plan)<br>
+                                        🔸 (cantidad) decodificadores. Debe contar con el (los) televisor(es) para validar la señal de cable. (IMPORTANTE - 1 TV como mínimo para probar el servicio)<br>
+                                        🔸 Telefonía<br>
+                                        🔸 Liga 1MAX (Validar si figura dentro del plan)<br>
+                                        <br>
+                                        La Dirección para la instalación es: __________ en el distrito de __________.<br>
+                                        <br>
+                                        Si usted no estará presente, puede dejar a una persona mayor de edad para atender al técnico. Perfecto, su visita queda confirmada para el (fecha), en horario (7 a 7:30am / 9AM a 1pm / de 2PM a 6PM).<br>
+                                        <br>
+                                        Muchas gracias. ¡Que tenga un buen día!
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top:2rem;">2. Guion de Seguimiento</h3>
+                    <div class="container__grid">
+                        <div class="container__grid__item">
+                            <div id="sf-reconfirmacion">
+                                <h3>2.1 Reconfirmación de visita</h3>
+                                <p>Buscamos reconfirmar el mismo día de la visita.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> del área de programación de Claro. ¿Me comunico con (Nombre del Titular, primer nombre y apellido completo)? Le llamamos para reconfirmar su visita programada para el día de hoy en el rango horario de (9AM a 1pm / de 2PM a 6PM).<br>
+                                        <br>
+                                        🔸 Respuesta SÍ: Muchas gracias por su confirmación, nuestro técnico se estará acercando en dicho rango horario. ¡Que tenga un buen día!<br>
+                                        🔸 Respuesta NO: Speech de reprogramación (ITEM 2.2) o rechazo (rebate).
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-repro-mesa">
+                                <h3>2.2 Reprogramación en mesa</h3>
+                                <p>Cliente solicita reprogramar fecha de instalación en llamada previa a la visita.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> de parte del área de programación de Claro. ¿Me comunico con (Nombre del Titular, nombre completo)? Le llamamos para confirmar su instalación/migración programada para el (fecha), en horario (9AM a 1pm / de 2PM a 6PM). ¿Nos confirma su disponibilidad?<br>
+                                        <br>
+                                        🔸 Respuesta SÍ: De acuerdo, su visita queda programada para el (fecha) en el rango (9AM a 1pm / de 2PM a 6PM). Muchas gracias por su atención. ¡Que tenga un buen día!<br>
+                                        🔸 Respuesta NO: Lamentamos no poder atenderla el día de hoy, ¿nos podría indicar si mañana en el rango (9AM a 1pm / de 2PM a 6PM) podría recibir a nuestro técnico por favor?
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-repro-campo">
+                                <h3>2.3 Reprogramación en campo</h3>
+                                <p>Cliente solicita reprogramar fecha de instalación cuando el técnico está en la puerta del lugar de instalación.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> de parte del área de programación de Claro. ¿Me comunico con (Nombre del Titular, nombre completo)? Le llamamos por la solicitud de (tipo de actividad). Nuestro técnico nos informa que no es posible atenderlo en este momento, ¿nos podría indicar por favor el motivo?<br>
+                                        <br>
+                                        De acuerdo, ¿podemos programar una nueva visita el día de hoy por la (tarde)? (o según disponibilidad del cliente). Su nueva visita queda agendada para el día (fecha) en el rango (9AM a 1pm / de 2PM a 6PM). Muchas gracias por su atención. ¡Que tenga un buen día!
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top:2rem;">3. Speech de Validación</h3>
+                    <div class="container__grid">
+                        <div class="container__grid__item">
+                            <div id="sf-val-inst">
+                                <h3>3.1 Validación - Instalaciones / Post-venta</h3>
+                                <p>Validación de la llamada tras una instalación o post-venta.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>, le saluda <span class="adp"></span> por encargo de la empresa Claro, le llamamos para validar si la instalación se realizó correctamente.<br>
+                                        <br>
+                                        Por su seguridad esta llamada está siendo grabada el <span class="dia"></span> de <span class="mes"></span> del <span class="anio"></span>. Indíqueme sus Nombres y Apellidos Completos y su DNI.<br>
+                                        <br>
+                                        Por favor confírmenos si el servicio de Internet, Cable y Telefonía ¿está todo conforme? (La pregunta es en base al plan contratado)<br>
+                                        <br>
+                                        🔸 Respuesta Sí: Continuar validación.<br>
+                                        🔸 Respuesta No: Rechazamos, ¿cuál es el motivo?<br>
+                                        <br>
+                                        Muchas gracias, ¡Que tenga un buen día!
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-val-manto">
+                                <h3>3.2 Validación - Mantenimiento</h3>
+                                <p>Validación de la llamada tras una atención de mantenimiento.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <span class="saludo-dinamico"></span>, le saluda <span class="adp"></span> por encargo de la empresa Claro, le llamamos para validar la atención de mantenimiento del servicio.<br>
+                                        <br>
+                                        Por su seguridad esta llamada está siendo grabada el <span class="dia"></span> de <span class="mes"></span> del <span class="anio"></span>. Indíqueme sus Nombres y Apellidos Completos y su DNI.<br>
+                                        <br>
+                                        Por favor confírmenos si el técnico logró solucionar el servicio de Internet, Cable y Telefonía y si todo está conforme. (La pregunta es en base al problema con el servicio contratado)<br>
+                                        <br>
+                                        🔸 Respuesta Sí: Continuar validación.<br>
+                                        🔸 Respuesta No: Rechazamos.<br>
+                                        <br>
+                                        Muchas gracias, ¡Que tenga un buen día!
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top:2rem;">4. Rebates ante un rechazo</h3>
+                    <div class="container__grid">
+                        <div class="container__grid__item">
+                            <div id="sf-reb-migracion">
+                                <h3>4.1 Rebate - No desea la migración tecnológica</h3>
+                                <p>Cliente no desea la migración tecnológica de equipos.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        Sr(a). [Nombre], es importante realizar la actualización tecnológica de los equipos que tiene actualmente y aprovechar al 100% la velocidad que tiene contratada, una conexión más estable, mayor velocidad de navegación y una mejor experiencia con su internet. Quiero mencionar que se estará realizando cambio de equipos y cableado para mejorar su servicio.<br>
+                                        <br>
+                                        Por ello, es importante que pueda brindarnos un espacio de tiempo para realizar este trabajo.
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-reb-demora-campo">
+                                <h3>4.2 Rebate - Demoras en la instalación en campo</h3>
+                                <p>Cliente molesto por el tiempo de instalación en campo.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        Sr(a). [Nombre], entendemos su incomodidad por el tiempo de instalación y le pedimos disculpas por la demora. Le aseguramos que nuestro técnico realizará el trabajo con el mayor cuidado para garantizar que su migración quede correctamente instalada y operativa. Le pedimos un poco de paciencia porque el objetivo es dejar su servicio funcionando al 100% y evitar futuros inconvenientes.
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-reb-demora-visita">
+                                <h3>4.3 Rebate - Demoras en la visita técnica</h3>
+                                <p>Cliente molesto por el tiempo de espera de la visita.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        Sr(a). [Nombre], entendemos su incomodidad por el tiempo de espera y le pedimos disculpas por los inconvenientes ocasionados. Queremos asegurarle que nuestra prioridad es completar su instalación lo antes posible para que pueda disfrutar de los servicios de Claro. Por ello, le solicitamos que nos permita realizar la visita en el horario indicado; nuestro técnico se encargará de dejar el servicio operativo y, al finalizar, se realizará un reporte fotográfico como sustento de la instalación.
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-reb-telefonia">
+                                <h3>4.4 Rebate - No desea telefonía</h3>
+                                <p>Cliente rechaza el servicio de telefonía.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        Sr(a). [Nombre], recuerde que ya que está contratando el servicio de internet y por solo S/ 1 adicional puede llevar también la telefonía como parte de la promoción.<br>
+                                        <br>
+                                        Por eso, mi recomendación es que aproveche la promoción y tenga ambos servicios por solo S/ 1 adicional.
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-reb-repetidor">
+                                <h3>4.5 Rebate - No desea repetidor</h3>
+                                <p>Cliente rechaza el repetidor.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        Sr(a). [Nombre], recuerde que con el repetidor tendrá mayor cobertura de WIFI en su domicilio, podrá tener señal WIFI en lugares más alejados del router.
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="sf-reb-no-servicio">
+                                <h3>4.6 Rebate - No desea el servicio</h3>
+                                <p>Cliente indica que ya no desea el servicio.</p>
+                                <div class="plantilla">
+                                    <p>
+                                        <b>Yo no vivo en ese domicilio / Soy el Titular, pero yo no vivo allí</b><br>
+                                        🔸 ¿En todo caso podría facilitarnos el número del usuario para poder validar si hay algún inconveniente con el servicio? ¿Y de ser así poder coordinar fecha y hora de visita?<br>
+                                        <br>
+                                        <b>Ya no deseo, no me encontraré en casa / Ya no deseo, voy a viajar</b><br>
+                                        🔸 ¿Habrá algún familiar en casa que sea mayor de edad y pueda recibir al técnico?<br>
+                                        🔸 ¿Me indica qué día tiene disponible para que el técnico pueda acercarse y realizar la validación del inconveniente reportado?<br>
+                                        <br>
+                                        <b>Ya no deseo, mi servicio ya se encuentra operativo</b><br>
+                                        🔸 Con esta atención, garantizamos que, si tuvo algún inconveniente, este no se vuelva a presentar.<br>
+                                        <br>
+                                        Recuerde que nuestro objetivo es brindarle un servicio de calidad, por ello es importante que reciba la atención del técnico.
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section id="activaciones">
@@ -4986,6 +5467,27 @@
     <script src="./assets/js/mac-converter.js"></script>
     <script src="./assets/js/responsive-tables.js"></script>
 
+    <script>
+        // Speech Fija Masiva: completa saludo, fecha y nombre del asesor si el script general no lo hizo
+        (function () {
+            function fill() {
+                var sec = document.getElementById('speech-fija-masiva');
+                if (!sec) return;
+                var d = new Date(), h = d.getHours();
+                var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                var saludo = h < 12 ? 'Buenos días' : (h < 18 ? 'Buenas tardes' : 'Buenas noches');
+                var vals = { 'saludo-dinamico': saludo, dia: d.getDate(), mes: meses[d.getMonth()], anio: d.getFullYear() };
+                Object.keys(vals).forEach(function (c) {
+                    sec.querySelectorAll('.' + c).forEach(function (el) { if (!el.textContent.trim()) el.textContent = vals[c]; });
+                });
+                var ref = Array.prototype.find.call(document.querySelectorAll('.adp'), function (el) {
+                    return !sec.contains(el) && el.textContent.trim();
+                });
+                if (ref) sec.querySelectorAll('.adp').forEach(function (el) { if (!el.textContent.trim()) el.textContent = ref.textContent; });
+            }
+            document.addEventListener('DOMContentLoaded', function () { fill(); setTimeout(fill, 800); });
+        })();
+    </script>
 </body>
 
 </html>
