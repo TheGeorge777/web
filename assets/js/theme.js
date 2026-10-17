@@ -57,6 +57,78 @@
     }
 
     /* ------------------------------------------------------------------
+       1b. Tema Halloween (solo en octubre; se puede apagar con el botón 🎃)
+       ------------------------------------------------------------------ */
+    function initSeason() {
+        var btn = $('#season-toggle');
+        if (!btn) return;
+        if (new Date().getMonth() !== 9) { btn.hidden = true; return; }
+        btn.hidden = false;
+        function paint() {
+            var on = root.getAttribute('data-season') === 'halloween';
+            btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+            btn.setAttribute('title', on ? 'Desactivar tema Halloween' : 'Activar tema Halloween');
+        }
+        paint();
+        btn.addEventListener('click', function () {
+            var on = root.getAttribute('data-season') === 'halloween';
+            if (on) root.removeAttribute('data-season');
+            else root.setAttribute('data-season', 'halloween');
+            try { localStorage.setItem('hitss-season', on ? 'off' : 'on'); } catch (e) { }
+            paint();
+        });
+    }
+
+    /* ------------------------------------------------------------------
+       1c. Murciélagos al hacer clic (solo con el tema Halloween activo)
+       ------------------------------------------------------------------ */
+    function initClickBats() {
+        var BAT = '<svg viewBox="0 0 32 18" xmlns="http://www.w3.org/2000/svg"><path d="M16 6L18 2 19 7C22 5 27 3 32 5 30 8 30 11 28 14 26 12 24 12 22 14 21 12 19 12 16 16 13 12 11 12 10 14 8 12 6 12 4 14 2 11 2 8 0 5 5 3 10 5 13 7L14 2Z"/></svg>';
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var alive = 0;
+
+        document.addEventListener('click', function (e) {
+            if (reduce || root.getAttribute('data-season') !== 'halloween') return;
+            if (!document.body || alive > 36 || !document.body.animate) return;
+
+            var count = 3 + Math.floor(Math.random() * 3);
+            for (var i = 0; i < count; i++) {
+                (function () {
+                    var w = 28 + Math.random() * 24;
+                    var el = document.createElement('span');
+                    el.className = 'click-bat';
+                    el.innerHTML = BAT;
+                    el.style.width = w + 'px';
+                    el.style.height = (w * 0.56) + 'px';
+                    el.style.left = (e.clientX - w / 2) + 'px';
+                    el.style.top = (e.clientY - w * 0.28) + 'px';
+                    document.body.appendChild(el);
+                    alive++;
+
+                    var ang = (-160 + Math.random() * 140) * Math.PI / 180; // hacia arriba
+                    var dist = 90 + Math.random() * 130;
+                    var dx = Math.cos(ang) * dist;
+                    var dy = Math.sin(ang) * dist;
+                    var rot = (Math.random() - 0.5) * 50;
+                    var dur = 900 + Math.random() * 600;
+
+                    var anim = el.animate([
+                        { transform: 'translate(0,0) rotate(0deg) scale(.4)', opacity: 0 },
+                        { transform: 'translate(' + dx * 0.25 + 'px,' + dy * 0.25 + 'px) rotate(' + rot * 0.4 + 'deg) scale(1)', opacity: 1, offset: 0.2 },
+                        { transform: 'translate(' + dx * 0.7 + 'px,' + (dy * 0.7 - 14) + 'px) rotate(' + rot + 'deg) scale(1)', opacity: 1, offset: 0.7 },
+                        { transform: 'translate(' + dx + 'px,' + (dy - 30) + 'px) rotate(' + rot + 'deg) scale(.8)', opacity: 0 }
+                    ], { duration: dur, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
+
+                    anim.onfinish = function () {
+                        alive--;
+                        if (el.parentNode) el.parentNode.removeChild(el);
+                    };
+                })();
+            }
+        }, true);
+    }
+
+    /* ------------------------------------------------------------------
        2. Menú lateral en móvil
        ------------------------------------------------------------------ */
     function openNav() { document.body.classList.add('nav-open'); }
@@ -239,6 +311,8 @@
     /* ------------------------------------------------------------------ */
     function init() {
         try { initTheme(); } catch (e) { console.warn('theme:', e); }
+        try { initSeason(); } catch (e) { console.warn('season:', e); }
+        try { initClickBats(); } catch (e) { console.warn('bats:', e); }
         try { initDrawer(); } catch (e) { console.warn('drawer:', e); }
         try { initSearch(); } catch (e) { console.warn('search:', e); }
         try { initScrollSpy(); } catch (e) { console.warn('scrollspy:', e); }
