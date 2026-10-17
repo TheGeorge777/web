@@ -10,6 +10,15 @@ Este proyecto es una herramienta integral diseñada para optimizar el flujo de t
 
 Centralizar y estandarizar las plantillas de comunicación utilizadas en los diferentes procesos de seguimiento técnico, reduciendo tiempos de respuesta y mejorando la calidad del servicio.
 
+## 🎨 Diseño y tema visual
+
+La interfaz usa una capa de diseño independiente que se carga al final y no toca la lógica de las plantillas:
+
+- `assets/css/theme-modern.css`: tokens de diseño (colores, radios, sombras), modo claro/oscuro, barra lateral, tarjetas, tablas, formularios, diálogos y diseño responsive.
+- `assets/js/theme.js`: botón de modo oscuro (recuerda la preferencia), menú lateral desplegable en móvil, buscador de plantillas (`Ctrl/Cmd + K`) y resaltado de la sección activa en el menú.
+
+Para cambiar la identidad visual basta con editar las variables de `:root` (y `[data-theme="dark"]`) al inicio de `theme-modern.css`.
+
 ## ✨ Características Principales
 
 ### 🗣️ Speech de Validación

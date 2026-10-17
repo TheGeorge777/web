@@ -1,19 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./assets/img/icon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#f4f5f9">
+    <meta name="color-scheme" content="light dark">
+    <!-- Aplica el tema guardado antes de pintar para evitar parpadeos -->
+    <script>
+        try {
+            var t = localStorage.getItem('hitss-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+            // Halloween: activo en octubre salvo que el usuario lo apague con el botón 🎃
+            if (new Date().getMonth() === 9 && localStorage.getItem('hitss-season') !== 'off') {
+                document.documentElement.setAttribute('data-season', 'halloween');
+            }
+        } catch (e) { }
+    </script>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/table-styles.css">
     <link rel="stylesheet" href="./assets/css/modals.css">
+    <!-- Tema moderno (debe ir al final para sobrescribir los estilos anteriores) -->
+    <link rel="stylesheet" href="./assets/css/theme-modern.css">
+    <!-- Tema Halloween (opcional: se activa en octubre; borrar esta línea para quitarlo) -->
+    <link rel="stylesheet" href="./assets/css/theme-halloween.css">
 
     <title>Plantillas de Mesa de Seguimiento Fija - Hitss Perú</title>
 
@@ -24,6 +46,10 @@
     <header>
 
         <div class="header__container">
+
+            <button id="menu-toggle" class="icon-btn menu-btn" type="button" aria-label="Abrir menú" aria-controls="sidebar">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
 
             <button id="btn-abrir-modal" class="log-in-button">Iniciar Sesión</button>
 
@@ -90,19 +116,44 @@
 
             </ul>
 
+            <button id="season-toggle" class="icon-btn" type="button" aria-label="Tema Halloween" title="Tema Halloween" aria-pressed="false" hidden>🎃</button>
+
+            <button id="theme-toggle" class="icon-btn" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+                <span class="material-symbols-outlined">dark_mode</span>
+            </button>
+
         </div>
 
 
 
     </header>
 
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+
     <main>
 
-        <nav class="nav">
+        <nav class="nav" id="sidebar">
 
-            <div class="sticky-header-space"></div>
+            <div class="sticky-header-space">
+                <a class="brand" href="#home" aria-label="Ir al inicio">
+                    <span class="brand__logo"><span class="material-symbols-outlined">support_agent</span></span>
+                    <span class="brand__text">
+                        <strong>Mesa de Seguimiento</strong>
+                        <small>Hitss · Claro Perú</small>
+                    </span>
+                </a>
+            </div>
+
+            <div class="nav-search">
+                <span class="material-symbols-outlined">search</span>
+                <input id="nav-search" type="search" placeholder="Buscar plantilla…" autocomplete="off"
+                    aria-label="Buscar plantilla en el menú">
+                <kbd>Ctrl K</kbd>
+            </div>
 
             <div class="nav_scroll">
+
+                <div class="nav-empty" id="nav-empty">No se encontraron plantillas.</div>
 
                 <ul class="list">
 
@@ -917,8 +968,7 @@
 
                     <li class="list__item">
                         <div class="list__button">
-                            <a href="#" class="nav__link">© 2025 Desarrollado por Paolo Crisóstomo.</a>
-                            <a href="#" class="nav__link">Actualizado el 15/09/2025.</a>
+                                                        <a href="#" class="nav__link">Actualizado por Jorge Goicochea el 17/10/2026.</a>
                         </div>
                     </li>
 
@@ -947,12 +997,28 @@
 
         <aside>
             <div id="home" class="container">
+                <span class="hero__eyebrow">Hitss · Mesa de Seguimiento Fija</span>
+                <span class="hero__eyebrow hero__eyebrow--halloween">🎃 Edición Halloween · Hitss</span>
                 <h1>Plantillas de Mesa de Seguimiento Fija</h1>
                 <p>Estas plantillas son para el seguimiento de los casos que se encuentran en la mesa de seguimiento
-                    fija. Se hizo una corrreción y adaptación de las diferentes plantillas para facilitar su uso.</p>
+                    fija. Se hizo una corrección y adaptación de las diferentes plantillas para facilitar su uso.</p>
 
+                <div class="hero__hints">
+                    <span><kbd>Ctrl K</kbd> Buscar plantilla</span>
+                    <span><kbd>Ctrl B</kbd> Lista de tareas</span>
+                    <span><kbd>Copiar</kbd> en cada plantilla para usarla al instante</span>
+                </div>
 
-
+                <div class="quick-grid" role="navigation" aria-label="Accesos rápidos">
+                    <a class="quick-card" href="#speech-val-llamada"><span class="ico"><span class="material-symbols-outlined">record_voice_over</span></span><span><b>Speech de Validación</b><small>Llamadas de seguimiento</small></span></a>
+                    <a class="quick-card" href="#speech-fija-masiva"><span class="ico"><span class="material-symbols-outlined">campaign</span></span><span><b>Speech Fija Masiva</b><small>Programación y rebates</small></span></a>
+                    <a class="quick-card" href="#activaciones"><span class="ico"><span class="material-symbols-outlined">bolt</span></span><span><b>Activaciones</b><small>Instalación, plan y equipos</small></span></a>
+                    <a class="quick-card" href="#flags"><span class="ico"><span class="material-symbols-outlined">flag</span></span><span><b>Flags</b><small>Etiquetas y alertas</small></span></a>
+                    <a class="quick-card" href="#cod-manto"><span class="ico"><span class="material-symbols-outlined">table_chart</span></span><span><b>Códigos de Manto</b><small>Tabla técnica actualizada</small></span></a>
+                    <a class="quick-card" href="#rechazos-mesa-campo"><span class="ico"><span class="material-symbols-outlined">block</span></span><span><b>Rechazos</b><small>Mesa, campo y técnico</small></span></a>
+                    <a class="quick-card" href="#cierre-manto-mesa"><span class="ico"><span class="material-symbols-outlined">task_alt</span></span><span><b>Cierre de Manto</b><small>Mesa y campo</small></span></a>
+                    <a class="quick-card" href="#guia-activaciones"><span class="ico"><span class="material-symbols-outlined">menu_book</span></span><span><b>Guías y manuales</b><small>PDF de procedimientos</small></span></a>
+                </div>
             </div>
 
             <section id="speech-val-llamada">
@@ -5466,6 +5532,7 @@
     <script src="./assets/js/copy.js"></script>
     <script src="./assets/js/mac-converter.js"></script>
     <script src="./assets/js/responsive-tables.js"></script>
+    <script src="./assets/js/theme.js"></script>
 
     <script>
         // Speech Fija Masiva: completa saludo, fecha y nombre del asesor si el script general no lo hizo
