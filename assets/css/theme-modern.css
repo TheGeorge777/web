@@ -657,7 +657,7 @@ main aside>section>.container {
     gap: 18px;
 }
 
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container {
     border-bottom: 0;
 }
 
@@ -862,8 +862,31 @@ section {
     min-width: 0;
 }
 
-#speech-val-llamada .container__grid {
+#speech-val-llamada .container__grid,
+#speech-fija-masiva .container__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Subtítulos de grupo dentro de una sección (p. ej. "1. Guion de Programación") */
+.container>h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1.4rem;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.container>h3::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent);
 }
 
 .container__grid__item {
@@ -886,14 +909,14 @@ section {
     gap: 10px;
 }
 
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item {
     text-align: left;
 }
 
 /* ---- Plantillas (bloque de texto copiable) ---- */
 .plantilla,
 .plantilla-dinamica .plantilla,
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .plantilla {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .plantilla {
     position: relative;
     flex: 1;
     width: 100%;
@@ -1231,7 +1254,7 @@ textarea::placeholder {
 }
 
 /* Reagendados (formulario) */
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic {
     background: var(--surface-2);
     border: 1px solid var(--line);
     border-radius: 14px;
@@ -1239,7 +1262,7 @@ textarea::placeholder {
     padding: 20px;
 }
 
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic label {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic label {
     color: var(--text-2);
     font-size: 0.78rem;
     font-weight: 700;
@@ -1247,9 +1270,9 @@ textarea::placeholder {
     text-transform: uppercase;
 }
 
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic input,
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic select,
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic textarea {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic input,
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic select,
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic textarea {
     background-color: var(--surface);
     color: var(--text);
     border: 1px solid var(--line-2);
@@ -1257,26 +1280,26 @@ textarea::placeholder {
     padding: 10px 14px;
 }
 
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic input:hover,
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic select:hover,
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic textarea:hover {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic input:hover,
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic select:hover,
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic textarea:hover {
     border-color: var(--text-3);
     box-shadow: none;
 }
 
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic input:focus,
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic select:focus,
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic textarea:focus {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic input:focus,
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic select:focus,
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic textarea:focus {
     background-color: var(--surface);
     border-color: var(--accent);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic input[type="date"] {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic input[type="date"] {
     color-scheme: inherit;
 }
 
-:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume) .container__grid__item__dinamic>div[style*="flex-direction: column"] {
+:is(#home,#speech-val-llamada,#flags,#speech-inicio,#activaciones,#validaciones,#cod-manto,#general-seguimiento,#reagendados,#rechazos-mesa-campo,#rechazos-motivo-tecnico,#cierre-manto-mesa,#cierre-manto-campo,#derivacion-pext-hfc,#derivacion-pext-ftth,#modelos-mta-ont,#descarte-cod-aut,#guia-activaciones,#manuales-aplicaciones,#procedimientos-postventa,#cambios-equipos,#activacion-servicios-plume,#speech-fija-masiva) .container__grid__item__dinamic>div[style*="flex-direction: column"] {
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 12px;
