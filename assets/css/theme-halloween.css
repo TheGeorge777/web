@@ -208,3 +208,49 @@ html[data-season="halloween"][data-theme="dark"] {
     display: none;
 }
 
+
+/* ---- Usuario: cabeza de zombi en lugar del avatar ---- */
+[data-season="halloween"] .user-credentials > svg:first-child {
+    display: none;
+}
+
+[data-season="halloween"] .user-credentials::before {
+    content: "";
+    flex: none;
+    width: 38px;
+    height: 38px;
+    margin: -2px 0 -2px -2px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='37' rx='22' ry='23' fill='%239ccc4f' stroke='%233f6b1a' stroke-width='3'/%3E%3Cpath d='M11 27C11 13 22 6 32 8c10-2 21 5 21 19-6-7-12-9-21-9s-15 2-21 9Z' fill='%232b2140' stroke='%23140a22' stroke-width='1.5'/%3E%3Cpath d='M38 12l3 7M44 14l-2 6' stroke='%239ccc4f' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='23' cy='35' r='7.5' fill='%23fff' stroke='%233f6b1a' stroke-width='2'/%3E%3Ccircle cx='24.5' cy='36' r='3.2' fill='%231a1030'/%3E%3Ccircle cx='42' cy='35' r='5' fill='%23fff' stroke='%233f6b1a' stroke-width='2'/%3E%3Ccircle cx='41' cy='36' r='2.2' fill='%231a1030'/%3E%3Cpath d='M16 27l13 4M36 29l12-4' stroke='%231a1030' stroke-width='2.5' stroke-linecap='round'/%3E%3Cpath d='M19 48Q32 60 45 48Z' fill='%232a1038' stroke='%233f6b1a' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M23 49v4M28 50.5v5M33 51v5M38 50.5v4M42 49v3' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M47 40l5 8M45 45l8-3M49 38v-1' stroke='%233f6b1a' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M10 38c-3 0-5 3-4 6M54 38c3 0 5 3 4 6' stroke='%233f6b1a' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    filter: drop-shadow(0 2px 6px rgba(120, 220, 60, .45));
+    transition: transform .25s ease;
+}
+
+[data-season="halloween"] .user-credentials:hover::before {
+    transform: rotate(-10deg) scale(1.12);
+}
+
+/* ---- Murciélagos al hacer clic (los crea theme.js) ---- */
+.click-bat {
+    position: fixed;
+    z-index: 99999;
+    pointer-events: none;
+    will-change: transform, opacity;
+    filter: drop-shadow(0 0 6px rgba(255, 140, 40, 1));
+}
+
+.click-bat svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: #140826;
+    stroke: #ffb066;
+    stroke-width: .8;
+    stroke-linejoin: round;
+    animation: bat-flap .16s ease-in-out infinite alternate;
+    transform-origin: 50% 60%;
+}
+
+@keyframes bat-flap {
+    from { transform: scaleY(1); }
+    to { transform: scaleY(.4); }
+}
