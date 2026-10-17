@@ -84,17 +84,16 @@
        ------------------------------------------------------------------ */
     function initClickBats() {
         var BAT = '<svg viewBox="0 0 32 18" xmlns="http://www.w3.org/2000/svg"><path d="M16 6L18 2 19 7C22 5 27 3 32 5 30 8 30 11 28 14 26 12 24 12 22 14 21 12 19 12 16 16 13 12 11 12 10 14 8 12 6 12 4 14 2 11 2 8 0 5 5 3 10 5 13 7L14 2Z"/></svg>';
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var alive = 0;
 
         document.addEventListener('click', function (e) {
-            if (reduce || root.getAttribute('data-season') !== 'halloween') return;
-            if (!document.body || alive > 36 || !document.body.animate) return;
+            if (root.getAttribute('data-season') !== 'halloween') return;
+            if (!document.body || alive > 48 || !document.body.animate) return;
 
-            var count = 3 + Math.floor(Math.random() * 3);
+            var count = 5 + Math.floor(Math.random() * 3);
             for (var i = 0; i < count; i++) {
                 (function () {
-                    var w = 28 + Math.random() * 24;
+                    var w = 30 + Math.random() * 28;
                     var el = document.createElement('span');
                     el.className = 'click-bat';
                     el.innerHTML = BAT;
@@ -105,20 +104,26 @@
                     document.body.appendChild(el);
                     alive++;
 
-                    var ang = (-160 + Math.random() * 140) * Math.PI / 180; // hacia arriba
-                    var dist = 90 + Math.random() * 130;
+                    // trayectoria: sube en abanico con un zigzag para que parezca vuelo real
+                    var ang = (-165 + Math.random() * 150) * Math.PI / 180;
+                    var dist = 160 + Math.random() * 190;
                     var dx = Math.cos(ang) * dist;
-                    var dy = Math.sin(ang) * dist;
-                    var rot = (Math.random() - 0.5) * 50;
-                    var dur = 900 + Math.random() * 600;
+                    var dy = Math.sin(ang) * dist - 40;
+                    var wob = 14 + Math.random() * 22;
+                    var phase = Math.random() * Math.PI * 2;
+                    var dur = 1300 + Math.random() * 900;
+                    var steps = 10, frames = [];
+                    for (var k = 0; k <= steps; k++) {
+                        var t = k / steps;
+                        var x = dx * t + Math.sin(t * Math.PI * 3 + phase) * wob * t;
+                        var y = dy * t + Math.cos(t * Math.PI * 3 + phase) * wob * 0.6 * t;
+                        var r = Math.sin(t * Math.PI * 3 + phase) * 16;
+                        var op = t < 0.08 ? t / 0.08 : (t > 0.75 ? (1 - t) / 0.25 : 1);
+                        var sc = 0.4 + Math.min(t * 4, 0.6) - (t > 0.75 ? (t - 0.75) * 0.8 : 0);
+                        frames.push({ transform: 'translate(' + x + 'px,' + y + 'px) rotate(' + r + 'deg) scale(' + sc + ')', opacity: op });
+                    }
 
-                    var anim = el.animate([
-                        { transform: 'translate(0,0) rotate(0deg) scale(.4)', opacity: 0 },
-                        { transform: 'translate(' + dx * 0.25 + 'px,' + dy * 0.25 + 'px) rotate(' + rot * 0.4 + 'deg) scale(1)', opacity: 1, offset: 0.2 },
-                        { transform: 'translate(' + dx * 0.7 + 'px,' + (dy * 0.7 - 14) + 'px) rotate(' + rot + 'deg) scale(1)', opacity: 1, offset: 0.7 },
-                        { transform: 'translate(' + dx + 'px,' + (dy - 30) + 'px) rotate(' + rot + 'deg) scale(.8)', opacity: 0 }
-                    ], { duration: dur, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
-
+                    var anim = el.animate(frames, { duration: dur, easing: 'ease-out', fill: 'forwards' });
                     anim.onfinish = function () {
                         alive--;
                         if (el.parentNode) el.parentNode.removeChild(el);
