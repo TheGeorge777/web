@@ -57,83 +57,6 @@
     }
 
     /* ------------------------------------------------------------------
-       1b. Tema Halloween (solo en octubre; se puede apagar con el botón 🎃)
-       ------------------------------------------------------------------ */
-    function initSeason() {
-        var btn = $('#season-toggle');
-        if (!btn) return;
-        if (new Date().getMonth() !== 9) { btn.hidden = true; return; }
-        btn.hidden = false;
-        function paint() {
-            var on = root.getAttribute('data-season') === 'halloween';
-            btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-            btn.setAttribute('title', on ? 'Desactivar tema Halloween' : 'Activar tema Halloween');
-        }
-        paint();
-        btn.addEventListener('click', function () {
-            var on = root.getAttribute('data-season') === 'halloween';
-            if (on) root.removeAttribute('data-season');
-            else root.setAttribute('data-season', 'halloween');
-            try { localStorage.setItem('hitss-season', on ? 'off' : 'on'); } catch (e) { }
-            paint();
-        });
-    }
-
-    /* ------------------------------------------------------------------
-       1c. Murciélagos al hacer clic (solo con el tema Halloween activo)
-       ------------------------------------------------------------------ */
-    function initClickBats() {
-        var BAT = '<svg viewBox="0 0 32 18" xmlns="http://www.w3.org/2000/svg"><path d="M16 6L18 2 19 7C22 5 27 3 32 5 30 8 30 11 28 14 26 12 24 12 22 14 21 12 19 12 16 16 13 12 11 12 10 14 8 12 6 12 4 14 2 11 2 8 0 5 5 3 10 5 13 7L14 2Z"/></svg>';
-        var alive = 0;
-
-        document.addEventListener('click', function (e) {
-            if (root.getAttribute('data-season') !== 'halloween') return;
-            if (!document.body || alive > 48 || !document.body.animate) return;
-
-            var count = 5 + Math.floor(Math.random() * 3);
-            for (var i = 0; i < count; i++) {
-                (function () {
-                    var w = 30 + Math.random() * 28;
-                    var el = document.createElement('span');
-                    el.className = 'click-bat';
-                    el.innerHTML = BAT;
-                    el.style.width = w + 'px';
-                    el.style.height = (w * 0.56) + 'px';
-                    el.style.left = (e.clientX - w / 2) + 'px';
-                    el.style.top = (e.clientY - w * 0.28) + 'px';
-                    document.body.appendChild(el);
-                    alive++;
-
-                    // trayectoria: sube en abanico con un zigzag para que parezca vuelo real
-                    var ang = (-165 + Math.random() * 150) * Math.PI / 180;
-                    var dist = 160 + Math.random() * 190;
-                    var dx = Math.cos(ang) * dist;
-                    var dy = Math.sin(ang) * dist - 40;
-                    var wob = 14 + Math.random() * 22;
-                    var phase = Math.random() * Math.PI * 2;
-                    var dur = 1300 + Math.random() * 900;
-                    var steps = 10, frames = [];
-                    for (var k = 0; k <= steps; k++) {
-                        var t = k / steps;
-                        var x = dx * t + Math.sin(t * Math.PI * 3 + phase) * wob * t;
-                        var y = dy * t + Math.cos(t * Math.PI * 3 + phase) * wob * 0.6 * t;
-                        var r = Math.sin(t * Math.PI * 3 + phase) * 16;
-                        var op = t < 0.08 ? t / 0.08 : (t > 0.75 ? (1 - t) / 0.25 : 1);
-                        var sc = 0.4 + Math.min(t * 4, 0.6) - (t > 0.75 ? (t - 0.75) * 0.8 : 0);
-                        frames.push({ transform: 'translate(' + x + 'px,' + y + 'px) rotate(' + r + 'deg) scale(' + sc + ')', opacity: op });
-                    }
-
-                    var anim = el.animate(frames, { duration: dur, easing: 'ease-out', fill: 'forwards' });
-                    anim.onfinish = function () {
-                        alive--;
-                        if (el.parentNode) el.parentNode.removeChild(el);
-                    };
-                })();
-            }
-        }, true);
-    }
-
-    /* ------------------------------------------------------------------
        2. Menú lateral en móvil
        ------------------------------------------------------------------ */
     function openNav() { document.body.classList.add('nav-open'); }
@@ -316,8 +239,6 @@
     /* ------------------------------------------------------------------ */
     function init() {
         try { initTheme(); } catch (e) { console.warn('theme:', e); }
-        try { initSeason(); } catch (e) { console.warn('season:', e); }
-        try { initClickBats(); } catch (e) { console.warn('bats:', e); }
         try { initDrawer(); } catch (e) { console.warn('drawer:', e); }
         try { initSearch(); } catch (e) { console.warn('search:', e); }
         try { initScrollSpy(); } catch (e) { console.warn('scrollspy:', e); }

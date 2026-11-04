@@ -12,10 +12,6 @@
         try {
             var t = localStorage.getItem('hitss-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             document.documentElement.setAttribute('data-theme', t);
-            // Halloween: activo en octubre salvo que el usuario lo apague con el botón 🎃
-            if (new Date().getMonth() === 9 && localStorage.getItem('hitss-season') !== 'off') {
-                document.documentElement.setAttribute('data-season', 'halloween');
-            }
         } catch (e) { }
     </script>
     <link
@@ -34,8 +30,8 @@
     <link rel="stylesheet" href="./assets/css/modals.css">
     <!-- Tema moderno (debe ir al final para sobrescribir los estilos anteriores) -->
     <link rel="stylesheet" href="./assets/css/theme-modern.css?v=20261017b">
-    <!-- Tema Halloween (opcional: se activa en octubre; borrar esta línea para quitarlo) -->
-    <link rel="stylesheet" href="./assets/css/theme-halloween.css?v=20261017b">
+    <!-- Tema azul y blanco (fondo con adornos plateados) -->
+    <link rel="stylesheet" href="./assets/css/theme-azul.css?v=20261105">
 
     <title>Plantillas de Mesa de Seguimiento Fija - Hitss Perú</title>
 
@@ -113,10 +109,12 @@
                     <a href="https://172.19.90.243/portalfactibilidad/public/login" class="header__link" target="_blank"
                         rel="noopener noreferrer">PORTAL DE FACTIBILIDAD</a>
                 </li>
+                <li class="header__item">
+                    <a href="https://claro.laraigo.com/sign-in" class="header__link" target="_blank"
+                        rel="noopener noreferrer">LARAIGO</a>
+                </li>
 
             </ul>
-
-            <button id="season-toggle" class="icon-btn" type="button" aria-label="Tema Halloween" title="Tema Halloween" aria-pressed="false" hidden>🎃</button>
 
             <button id="theme-toggle" class="icon-btn" type="button" aria-label="Cambiar tema" title="Cambiar tema">
                 <span class="material-symbols-outlined">dark_mode</span>
@@ -941,7 +939,7 @@
 
                     <li class="list__item">
                         <div class="list__button">
-                                                        <a href="#" class="nav__link">Actualizado por Jorge Goicochea el 17/10/2026.</a>
+                                                        <a href="#" class="nav__link">Actualizado por Jorge Goicochea el 04/11/2026.</a>
                         </div>
                     </li>
 
@@ -971,7 +969,6 @@
         <aside>
             <div id="home" class="container">
                 <span class="hero__eyebrow">Hitss · Mesa de Seguimiento Fija</span>
-                <span class="hero__eyebrow hero__eyebrow--halloween">🎃 Edición Halloween · Hitss</span>
                 <h1>Plantillas de Mesa de Seguimiento Fija</h1>
                 <p>Estas plantillas son para el seguimiento de los casos que se encuentran en la mesa de seguimiento
                     fija. Se hizo una corrección y adaptación de las diferentes plantillas para facilitar su uso.</p>
@@ -1879,6 +1876,7 @@
                                     <p id="texto-plantilla">
                                         <b>MESA MULTISKILL HITSS - ACTIVACION MESH</b><br>
                                         SERIE REPETIDOR:&nbsp;<br>
+                                        MAC REPETIDOR:&nbsp;<br>
                                         ESTADO:&nbsp;<br>
                                         REALIZADO POR: <span class="adp"></span>
                                     </p>

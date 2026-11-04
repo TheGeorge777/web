@@ -1,0 +1,180 @@
+/* ==========================================================================
+   THEME AZUL Y BLANCO · capa de colores (se carga después de theme-modern.css)
+   No cambia la lógica ni el HTML de las plantillas: solo paleta y fondos.
+   Para quitarlo: borra el <link> a este archivo en index.html.
+   ========================================================================== */
+
+/* ---- Paleta clara ---- */
+:root {
+    --brand: #1e6fe8;
+    --brand-600: #1553b8;
+    --brand-400: #5aa4ff;
+    --accent: #3b82f6;
+    --accent-600: #1d4ed8;
+    --ok: #3ccf7e;
+
+    --bg: #eef4fc;
+    --surface: #ffffff;
+    --surface-2: #f5f9ff;
+    --surface-3: #e4edfa;
+    --text: #0b1640;
+    --text-2: #3c4a78;
+    --text-3: #6f7ca3;
+    --line: #dae5f6;
+    --line-2: #c3d3ec;
+    --ink: #0b1640;
+
+    --side-bg: #060b44;
+    --side-text-2: #98a6d6;
+    --shadow-md: 0 2px 4px rgba(10, 30, 90, .06), 0 12px 28px rgba(10, 30, 90, .12);
+
+    --azul-img: url("../img/azul-bg.webp");
+    --page-veil: rgba(238, 244, 252, .92);
+}
+
+/* ---- Paleta oscura ---- */
+html[data-theme="dark"] {
+    --brand: #4d93ff;
+    --brand-600: #2a6fe0;
+    --brand-400: #8dbcff;
+    --accent: #7aa8ff;
+    --accent-600: #b4cdff;
+
+    --bg: #04062a;
+    --surface: #0a1050;
+    --surface-2: #0e1760;
+    --surface-3: #16226f;
+    --text: #f2f6ff;
+    --text-2: #bcc8ee;
+    --text-3: #8795c6;
+    --line: #1a2670;
+    --line-2: #2a3a8c;
+    --ink: #16226f;
+
+    --side-bg: #03051f;
+    --page-veil: rgba(4, 6, 42, .84);
+}
+
+/* Las tablas de códigos siguen en "papel claro" también en oscuro */
+html[data-theme="dark"] .tabla-container {
+    --surface: #ffffff;
+    --surface-2: #f5f9ff;
+    --surface-3: #e4edfa;
+    --text: #0b1640;
+    --text-2: #3c4a78;
+    --line: #dae5f6;
+    --line-2: #c3d3ec;
+}
+
+/* ---- Colores con valores fijos del tema base ---- */
+.nav {
+    background:
+        radial-gradient(420px 260px at -10% -5%, rgba(90, 164, 255, .30), transparent 70%),
+        radial-gradient(360px 240px at 110% 105%, rgba(255, 255, 255, .10), transparent 70%),
+        var(--side-bg);
+}
+
+.brand__logo {
+    background: linear-gradient(135deg, #8dbcff, #1553b8);
+    box-shadow: 0 8px 18px rgba(30, 111, 232, .45), inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+
+.user-credentials,
+thead,
+thead:hover,
+.table-responsive thead th:first-child {
+    background: #0c1670;
+}
+
+.user-info .adp {
+    color: #b9d6ff;
+}
+
+#cerrar-sesion {
+    fill: #8dbcff;
+}
+
+.dialog-toast,
+.copiado-dialog {
+    background: #0a1250;
+}
+
+.floating-btn {
+    background: linear-gradient(135deg, #8dbcff, #1d4ed8);
+}
+
+.quick-card .ico {
+    background: linear-gradient(135deg, #5aa4ff, #1553b8);
+    box-shadow: 0 6px 14px rgba(30, 111, 232, .4);
+}
+
+.quick-card:hover {
+    border-color: rgba(90, 164, 255, .6);
+}
+
+.container>h2::before {
+    background: linear-gradient(180deg, #8dbcff, #1d4ed8);
+}
+
+.container__grid__item:hover {
+    border-color: color-mix(in srgb, var(--brand) 55%, var(--line-2));
+}
+
+/* ---- Fondo de toda la página: imagen suave detrás del contenido ---- */
+main {
+    background:
+        linear-gradient(var(--page-veil), var(--page-veil)),
+        var(--azul-img) center / cover no-repeat;
+}
+
+/* ---- Portada: imagen azul con adornos plateados (espejada para que
+        los adornos queden a la derecha y el texto sobre el azul liso) ---- */
+#home {
+    background: linear-gradient(135deg, #050755 0%, #02031f 100%);
+    box-shadow: 0 24px 60px rgba(5, 10, 70, .4), inset 0 0 0 1px rgba(141, 188, 255, .22);
+}
+
+#home::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background: var(--azul-img) center / cover no-repeat;
+    transform: scaleX(-1);
+}
+
+#home h1 {
+    background: linear-gradient(90deg, #ffffff 15%, #cfe2ff 75%, #8dbcff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.hero__eyebrow {
+    border-color: rgba(141, 188, 255, .45);
+    background: rgba(90, 164, 255, .16);
+    color: #e3efff;
+}
+
+.hero__eyebrow::before {
+    background: #8dbcff;
+    box-shadow: 0 0 0 4px rgba(141, 188, 255, .25);
+}
+
+/* ---- Barra superior en modo oscuro: letras blancas para que se lean ---- */
+html[data-theme="dark"] .header__link,
+html[data-theme="dark"] .header__link__red {
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .header__link__red {
+    background: rgba(90, 164, 255, .22);
+}
+
+html[data-theme="dark"] .header__link:hover,
+html[data-theme="dark"] .header__link__red:hover {
+    background: rgba(141, 188, 255, .28);
+    color: #ffffff;
+}
