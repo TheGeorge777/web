@@ -23,11 +23,14 @@ Para cambiar la identidad visual basta con editar las variables de `:root` (y `[
 
 ## ✨ Características Principales
 
-### 🗣️ Speech de Validación
-- **Validación General**: Plantillas para llamadas de seguimiento post-instalación
-- **Seguimiento de Instalación**: Scripts específicos para confirmar visitas técnicas
-- **Post-venta**: Validaciones para servicios de mantenimiento
-- **Mantenimiento**: Confirmación de resolución de incidencias
+### 🗣️ Speech Fija Masiva
+Guiones oficiales según la **Circular Mesas de Apoyo N° 02 – 01102026 / Inst & Mantto (v1.1)** de la Gerencia de Instalaciones y Mantenimiento:
+- **1. Guion de Programación**: PM3, D+1 Instalaciones/Migraciones, D+1 / PV Senior, Adelanto, AM0 y Reprogramación automática
+- **2. Guion de Seguimiento**: Reconfirmación de visita, Reprogramación en mesa y Reprogramación en campo
+- **3. Speech de Validación**: Instalaciones (incluye validación del repetidor), Mantenimiento y Post-venta
+- **4. Rebates ante un rechazo**: No desea migración tecnológica, demoras en instalación/visita, no desea telefonía, no desea repetidor y no desea el servicio
+
+> Todo cambio al speech debe ser aprobado y comunicado formalmente por CLARO antes de aplicarse (Circular, punto V).
 
 ### 🔧 Gestión de Activaciones
 - **Instalaciones**: Plantillas para activación de servicios nuevos
@@ -102,53 +105,62 @@ Para cambiar la identidad visual basta con editar las variables de `:root` (y `[
 - **GitHub Pages**: Hosting y despliegue
 - **Visual Studio Code**: Entorno de desarrollo
 
-## � Estructura del Proyecto
+## 📁 Estructura del Proyecto
 
 ```
-plantillas-mesa-seguimiento/
-├── index.html                 # Página principal
-├── README.md                  # Documentación
-├── LICENSE                    # Licencia del proyecto
+web/
+├── index.html                  # Página principal
+├── README.md                   # Documentación
+├── LICENSE                     # Licencia (MPL-2.0)
+├── plantillas-backoffice/
+│   └── index.html              # Plantillas Backoffice
 ├── assets/
 │   ├── css/
-│   │   ├── style.css         # Estilos principales
-│   │   ├── modals.css        # Estilos para modales
-│   │   └── table-styles.css  # Estilos para tablas
+│   │   ├── style.css           # Estilos principales
+│   │   ├── modals.css          # Estilos para modales
+│   │   ├── table-styles.css    # Estilos para tablas
+│   │   ├── theme-modern.css    # Capa de diseño (tokens, claro/oscuro)
+│   │   ├── theme-azul.css      # Tema azul y blanco
+│   │   ├── theme-halloween.css # Tema alternativo
+│   │   ├── plantillas-premium.css
+│   │   └── plantillas-clean.css
 │   ├── js/
-│   │   ├── app.js           # Lógica principal
-│   │   ├── copy.js          # Funciones de copiado
-│   │   ├── datetime.js      # Manejo de fechas
-│   │   ├── indexeddb.js     # Base de datos local
-│   │   ├── mac-converter.js # Convertidor MAC
-│   │   ├── nav.js           # Navegación
-│   │   └── responsive-tables.js # Tablas responsivas
-│   └── img/                 # Imágenes y recursos
-│       ├── icon.svg         # Icono de la aplicación
-│       └── [modelos]/       # Imágenes de equipos
+│   │   ├── app.js              # Lógica principal
+│   │   ├── theme.js            # Modo oscuro, menú móvil y buscador
+│   │   ├── copy.js             # Funciones de copiado
+│   │   ├── datetime.js         # Manejo de fechas
+│   │   ├── indexeddb.js        # Base de datos local
+│   │   ├── mac-converter.js    # Convertidor MAC
+│   │   ├── nav.js              # Navegación
+│   │   ├── plantillas-backoffice.js
+│   │   ├── responsive-tables.js
+│   │   └── modules/            # codes.js, paste-handler.js, session.js
+│   ├── docs/                   # Guías y manuales en PDF
+│   └── img/                    # Imágenes de equipos e icono
 ```
 
 ## 🚀 Instalación y Uso
 
 ### Acceso en Línea
-Visita la aplicación en: [https://pcrisho.github.io/plantillas-mesa-seguimiento-github.io/](https://pcrisho.github.io/plantillas-mesa-seguimiento-github.io/)
+Visita la aplicación en: [https://thegeorge777.github.io/web/](https://thegeorge777.github.io/web/)
 
 ### Instalación Local
 
 1. **Clona el repositorio**:
    ```bash
-   git clone https://github.com/pcrisho/plantillas-mesa-seguimiento-github.io.git
+   git clone https://github.com/thegeorge777/web.git
    ```
 
 2. **Navega al directorio**:
    ```bash
-   cd plantillas-mesa-seguimiento-github.io
+   cd web
    ```
 
 3. **Abre en tu navegador**:
    - Abre `index.html` directamente en tu navegador
    - O usa un servidor local como Live Server en VS Code
 
-## � Guía de Uso
+## 📖 Guía de Uso
 
 ### Primer Acceso
 1. Al acceder por primera vez, ingresa tus credenciales ADP
@@ -167,7 +179,7 @@ Visita la aplicación en: [https://pcrisho.github.io/plantillas-mesa-seguimiento
 - Haz clic en "Generar Código" para crear uno nuevo
 - Los códigos se guardan automáticamente con timestamp
 
-#### � Convertir MAC
+#### 🔄 Convertir MAC
 - Ingresa una dirección MAC sin formato
 - El convertidor agregará automáticamente los dos puntos
 - Copia el resultado formateado
@@ -234,31 +246,43 @@ Las plantillas utilizan placeholders que se reemplazan automáticamente:
 
 ## 🆕 Últimas Actualizaciones
 
-### Versión 2.1.0 (Agosto 2025)
+### 09/11/2026
+- ✅ Speech Fija Masiva alineado con la Circular Mesas de Apoyo N° 02 – 01102026 (v1.1)
+- ✅ Speech de Validación: se agregó la validación del repetidor en Instalaciones y se separó Post-venta
+- ✅ Rebate "No desea repetidor": se agregó "PROMOCIÓN ACTUAL"
+- ✅ Horarios de cierre de AM0 y Reprogramación automática según la circular
+- ✅ Se retiró la sección antigua "Speech de Validación" (llamadas de seguimiento), reemplazada por la de Speech Fija Masiva
+- ✅ Créditos del Área de Planeamiento y Business Intelligence
+
+### Agosto 2025
 - ✅ Sistema de reagendamientos dinámicos
 - ✅ Formularios inteligentes con validación
 - ✅ Mejoras en el sistema de tareas
 - ✅ Optimización de la interfaz de usuario
 - ✅ Corrección de bugs y mejoras de rendimiento
 
-## � Versionado
+## 🏷️ Versionado
 
-Este proyecto utiliza [Semantic Versioning](https://semver.org/). Para ver las versiones disponibles, revisa los [tags de este repositorio](https://github.com/pcrisho/plantillas-mesa-seguimiento-github.io/tags).
+Este proyecto utiliza [Semantic Versioning](https://semver.org/). Para ver las versiones disponibles, revisa los [tags de este repositorio](https://github.com/thegeorge777/web/tags).
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está bajo la Licencia Pública de Mozilla 2.0 (MPL-2.0). Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-## 👥 Autor
+## 👥 Autores y Créditos
 
-### Roberto Paolo Crisóstomo Berrocal
-- **GitHub**: [@pcrisho](https://github.com/pcrisho)
-- **LinkedIn**: [paolo-crisostomo](https://linkedin.com/in/paolo-crisostomo/)
-- **Email**: Disponible en GitHub
+### Continuidad y mantenimiento
+**Área de Planeamiento y Business Intelligence** – Da continuidad al proyecto, originalmente desarrollado por un ex colaborador.
+
+**J & J**
+
+### Actualización
+**Jorge Goicochea** – Última actualización: 09/11/2026
 
 ## 🙏 Agradecimientos
 
 - Al equipo de Mesa de Seguimiento Hitss por el feedback constante
+- A la Gerencia de Instalaciones y Mantenimiento de CLARO por los lineamientos de comunicación estandarizada
 - A los usuarios que han contribuido con sugerencias y mejoras
 - A la comunidad de desarrolladores que han inspirado este proyecto
 
@@ -266,8 +290,8 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 
 Si encuentras algún bug o tienes sugerencias:
 
-1. **Issues**: [Crear un issue](https://github.com/pcrisho/plantillas-mesa-seguimiento-github.io/issues)
-2. **Discusiones**: [Iniciar una discusión](https://github.com/pcrisho/plantillas-mesa-seguimiento-github.io/discussions)
+1. **Issues**: [Crear un issue](https://github.com/thegeorge777/web/issues)
+2. **Discusiones**: [Iniciar una discusión](https://github.com/thegeorge777/web/discussions)
 3. **Email**: A través del perfil de GitHub
 
 ---
@@ -294,4 +318,4 @@ Si encuentras algún bug o tienes sugerencias:
 
 **⭐ Si este proyecto te ha sido útil, ¡no olvides darle una estrella!**
 
-*Última actualización: Agosto 2025 - Versión 2.1.0*
+*Última actualización: 09/11/2026 – Jorge Goicochea · Créditos: Área de Planeamiento y Business Intelligence*
