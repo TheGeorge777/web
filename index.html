@@ -32,6 +32,125 @@
     <link rel="stylesheet" href="./assets/css/theme-modern.css?v=20261017b">
     <!-- Tema azul y blanco (fondo con adornos plateados) -->
     <link rel="stylesheet" href="./assets/css/theme-azul.css?v=20261105">
+    <style id="plantilla-form-css">
+/* Plantillas con autocompletado: clic en la plantilla abre el panel flotante */
+.plantilla--editable { cursor: pointer; transition: box-shadow .15s, outline-color .15s; }
+.plantilla--editable:hover { box-shadow: 0 0 0 2px rgba(15, 98, 254, 0.35); }
+.plantilla--activa { outline: 2px solid #0f62fe; outline-offset: 0; }
+
+.campo-auto--lleno { color: #0f62fe; font-weight: 600; }
+
+.plantilla-form__grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.plantilla-form__campo { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.plantilla-form__campo > span {
+    font-size: 0.68rem; font-weight: 600; color: #5a6577;
+    text-transform: uppercase; letter-spacing: 0.02em;
+}
+.plantilla-form__campo input, .plantilla-form__campo textarea {
+    width: 100%; box-sizing: border-box; padding: 7px 9px; font-size: 0.85rem;
+    font-family: inherit; border: 1px solid #c9d2e0; border-radius: 6px;
+    background: #fff; color: #1f2937; resize: vertical;
+}
+.plantilla-form__campo input:focus, .plantilla-form__campo textarea:focus {
+    outline: none; border-color: #0f62fe; box-shadow: 0 0 0 2px rgba(15, 98, 254, 0.18);
+}
+
+.plantilla-flotante {
+    position: fixed; right: 24px; bottom: 96px; width: 360px;
+    max-width: calc(100vw - 32px); max-height: calc(100vh - 140px);
+    display: none; flex-direction: column; gap: 8px; padding: 14px;
+    background: #fff; border: 1px solid #c9d2e0; border-radius: 14px;
+    box-shadow: 0 12px 36px rgba(15, 30, 70, 0.25); z-index: 3000; overflow: hidden;
+}
+.plantilla-flotante--abierta { display: flex; }
+.plantilla-flotante__cabecera {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.9rem; color: #0f62fe;
+}
+.plantilla-flotante .plantilla-flotante__cerrar {
+    border: none; background: transparent; font-size: 1.5rem; line-height: 1;
+    cursor: pointer; color: #5a6577; margin: 0; padding: 0 4px;
+}
+.plantilla-flotante__campos { overflow-y: auto; min-height: 60px; padding-right: 2px; }
+.plantilla-flotante__vista-titulo { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; color: #5a6577; }
+.plantilla-flotante__vista {
+    margin: 0; padding: 8px 10px; max-height: 160px; overflow: auto;
+    font-family: Consolas, "Courier New", monospace; font-size: 0.72rem;
+    white-space: pre-wrap; background: #f2f5fb; border-radius: 8px; color: #1f2937;
+}
+.plantilla-flotante__pie { display: flex; gap: 8px; }
+.plantilla-flotante .plantilla-flotante__limpiar {
+    padding: 8px 12px; border: 1px solid #c9d2e0; border-radius: 8px;
+    background: #fff; color: #0f62fe; font-weight: 600; cursor: pointer; margin: 0;
+}
+.plantilla-flotante .plantilla-flotante__copiar {
+    flex: 1; padding: 8px 12px; border: none; border-radius: 8px;
+    background: #0f62fe; color: #fff; font-weight: 600; cursor: pointer; margin: 0;
+}
+.plantilla-flotante .plantilla-flotante__copiar:hover { background: #0353e9; }
+
+[data-theme="dark"] .plantilla-flotante { background: #0f1630; border-color: #2f3a55; }
+[data-theme="dark"] .plantilla-flotante__cabecera, [data-theme="dark"] .campo-auto--lleno { color: #8ab4ff; }
+[data-theme="dark"] .plantilla-flotante__vista { background: #11172a; color: #e5e9f2; }
+[data-theme="dark"] .plantilla-form__campo > span, [data-theme="dark"] .plantilla-flotante__vista-titulo { color: #9aa6b8; }
+[data-theme="dark"] .plantilla-form__campo input, [data-theme="dark"] .plantilla-form__campo textarea {
+    background: #11172a; border-color: #2f3a55; color: #e5e9f2;
+}
+[data-theme="dark"] .plantilla-flotante .plantilla-flotante__limpiar { background: #11172a; color: #8ab4ff; border-color: #2f3a55; }
+
+.plantilla-form__campo select {
+    width: 100%; box-sizing: border-box; padding: 7px 9px; font-size: 0.85rem;
+    font-family: inherit; border: 1px solid #c9d2e0; border-radius: 6px;
+    background: #fff; color: #1f2937;
+}
+.plantilla-form__campo select:focus { outline: none; border-color: #0f62fe; box-shadow: 0 0 0 2px rgba(15, 98, 254, 0.18); }
+.plantilla-form__sufijo { position: relative; }
+.plantilla-form__sufijo input { padding-right: 64px; }
+.plantilla-form__sufijo em {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    font-style: normal; font-weight: 700; font-size: 0.8rem; color: #5a6577; pointer-events: none;
+}
+.plantilla-flotante__asa { cursor: move; user-select: none; touch-action: none; }
+.plantilla-flotante__ventana { display: inline-flex; gap: 2px; }
+.plantilla-flotante .plantilla-flotante__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 26px; margin: 0; padding: 0; border: none; border-radius: 6px;
+    background: transparent; color: #5a6577; cursor: pointer;
+}
+.plantilla-flotante .plantilla-flotante__btn:hover { background: #e8ecf4; }
+.plantilla-flotante .plantilla-flotante__cerrar:hover { background: #e5484d; color: #fff; }
+.plantilla-flotante--min .plantilla-flotante__campos,
+.plantilla-flotante--min .plantilla-flotante__pie { display: none; }
+.plantilla-flotante--min { padding-bottom: 8px; }
+.plantilla-flotante--max {
+    left: 50% !important; top: 50% !important; right: auto !important; bottom: auto !important;
+    transform: translate(-50%, -50%); width: min(820px, calc(100vw - 48px));
+    max-height: calc(100vh - 64px);
+}
+.plantilla-flotante--max .plantilla-form__grid { grid-template-columns: 1fr 1fr; }
+.plantilla-flotante--max .plantilla-flotante__asa { cursor: default; }
+[data-theme="dark"] .plantilla-flotante .plantilla-flotante__btn { color: #9aa6b8; }
+[data-theme="dark"] .plantilla-flotante .plantilla-flotante__btn:hover { background: #1b2340; }
+.plantilla-flujo { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; padding-top: 10px; border-top: 1px dashed #c9d2e0; }
+.plantilla-flujo__titulo { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: #0f62fe; }
+.plantilla-flotante .plantilla-flujo__ir { margin: 0; padding: 8px 12px; border: 1px solid #0f62fe; border-radius: 8px; background: #e8f0ff; color: #0f62fe; font-weight: 600; cursor: pointer; }
+.plantilla-flotante .plantilla-flujo__ir:hover { background: #d5e4ff; }
+.plantilla-flujo__aviso { font-size: 0.78rem; color: #5a6577; }
+[data-theme="dark"] .plantilla-flujo { border-color: #2f3a55; }
+[data-theme="dark"] .plantilla-flotante .plantilla-flujo__ir { background: #11172a; color: #8ab4ff; border-color: #2f3a55; }
+.plantilla-form__multi { max-height: 190px; overflow-y: auto; margin-bottom: 6px; padding: 6px 8px; border: 1px solid #c9d2e0; border-radius: 6px; background: #fff; }
+.plantilla-form__multi-titulo { margin: 6px 0 2px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; color: #0f62fe; }
+.plantilla-form__multi-titulo:first-child { margin-top: 0; }
+.plantilla-form__multi-item { display: flex; align-items: flex-start; gap: 8px; padding: 3px 2px; font-size: 0.78rem; line-height: 1.25; cursor: pointer; border-radius: 4px; }
+.plantilla-form__multi-item:hover { background: #eef3ff; }
+.plantilla-form__multi-item input[type="checkbox"] { width: auto; margin: 2px 0 0; padding: 0; flex: none; pointer-events: none; }
+[data-theme="dark"] .plantilla-form__multi { background: #11172a; border-color: #2f3a55; }
+[data-theme="dark"] .plantilla-form__multi-item:hover { background: #1b2340; }
+[data-theme="dark"] .plantilla-form__multi-titulo { color: #8ab4ff; }
+.plantilla-form__dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+[data-theme="dark"] .plantilla-form__campo select { background: #11172a; border-color: #2f3a55; color: #e5e9f2; }
+
+    </style>
 
     <title>Plantillas de Mesa de Seguimiento Fija - Hitss Perú</title>
 
@@ -1336,7 +1455,7 @@
                                         <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> del área de programación de Claro. ¿Me comunico con (Nombre del Titular, primer nombre y apellido completo)? Le llamamos para reconfirmar su visita programada para el día de hoy en el rango horario de (9AM a 1pm / de 2PM a 6PM).<br>
                                         <br>
                                         🔸 Respuesta SÍ: Muchas gracias por su confirmación, nuestro técnico se estará acercando en dicho rango horario. ¡Que tenga un buen día!<br>
-                                        🔸 Respuesta NO: Speech de reprogramación (ITEM 2.2) o rechazo (rebate).
+                                        🔸 Respuesta NO: Speech de reprogramación (ITEM 2.2) o rechazo (ITEM 4 - REBATE).
                                     </p>
                                     <div class="copiar-contenedor">
                                         <span class="copy-icon" onclick="copiarPlantilla(this)">
@@ -1673,6 +1792,7 @@
                                 <div class="plantilla">
                                     <p id="texto-plantilla">
                                         <b>MESA MULTISKILL HITSS - CAMBIO DE EQUIPO</b><br>
+                                        EQUIPOS A RETIRAR:&nbsp;<br>
                                         EQUIPOS ACTIVADOS:&nbsp;<br>
                                         CODIGO DE AUT.:&nbsp;<br>
                                         ESTADO:&nbsp;<br>
@@ -4062,7 +4182,7 @@
                                     <p id="texto-plantilla">
                                         <b>MESA MULTISKILL HITSS - CONSULTA DE CINTILLOS HFC</b><br>
                                         PLANO:&nbsp;<br>
-                                        TAP:&nbsp;#X&nbsp;#&nbsp;&nbsp;NO&nbsp;SATURADO/SATURADO<br>
+                                        TAP:&nbsp;(#X #)&nbsp;&nbsp;(NO SATURADO/SATURADO)<br>
                                         REALIZADO POR:&nbsp;<span class="adp"></span> - ADP MULTISKILL HITSS
 
                                     </p>
@@ -4084,9 +4204,9 @@
                                     <p id="texto-plantilla">
                                         <b>MESA MULTISKILL HITSS - CONSULTA DE CINTILLOS FTTH</b><br>
                                         PLANO:&nbsp;<br>
-                                        FAT&nbsp;#&nbsp;SATURADO<br>
-                                        FAT&nbsp;#&nbsp;SATURADO<br>
-                                        FAT&nbsp;#&nbsp;NO&nbsp;SATURADO<br>
+                                        FAT&nbsp;(#)&nbsp;(SATURADO/NO SATURADO)<br>
+                                        FAT&nbsp;(#)&nbsp;(SATURADO/NO SATURADO)<br>
+                                        FAT&nbsp;(#)&nbsp;(SATURADO/NO SATURADO)<br>
                                         REALIZADO POR:&nbsp;<span class="adp"></span> - ADP MULTISKILL HITSS
 
                                     </p>
@@ -5241,6 +5361,831 @@
     <script src="./assets/js/mac-converter.js"></script>
     <script src="./assets/js/responsive-tables.js"></script>
     <script src="./assets/js/theme.js?v=20261017b"></script>
+    <script id="plantilla-form-js">
+/**
+ * Plantillas con autocompletado en tiempo real.
+ * Clic sobre una plantilla -> panel flotante con sus campos. Lo que se escribe o selecciona
+ * se refleja al instante en la plantilla; luego "Copiar plantilla".
+ */
+(function () {
+    "use strict";
+
+    const RX_CAMPO = /(?<![\w/])([^<>:\n]{1,60}?):((?:\s|&nbsp;)*)(?=<br\s*\/?>|$)/g;
+    const RX_BLANCO = /_{3,}/g;
+    const RX_PAREN = /\(([^()]{1,120})\)/g;
+    const RX_PAREN_O_TIPO = /\(([^()]{1,120})\)|instalaci[oó]n\/migraci[oó]n|\[nombre\]/gi;
+    const compartido = { nombre: "" }; // dato que se arrastra de una plantilla a otra
+    const RX_IGNORAR = /^\s*(el paquete contratado es|en caso de tener servicio|nota|importante)\b/i;
+    const RX_LARGO = /^(obs|observ|motivo|descartes|detalle|comentario|problema)/i;
+    const NBSP = " ";
+
+    // Franjas horarias disponibles
+    const FRANJAS = [
+        { codigo: "AM1", texto: "9AM A 1PM" },
+        { codigo: "PM1", texto: "2PM A 6PM" },
+        { codigo: "AM0", texto: "7 A 7:30AM" },
+    ];
+
+    let panel = null;
+    let activa = null;
+
+    const limpiarEtiqueta = (t) =>
+        t.replace(/^[^\p{L}\p{N}]+/u, "").replace(/\s+/g, " ").trim();
+
+    // dd/mm a partir de un valor yyyy-mm-dd
+    function formatoFecha(iso) {
+        const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+        return m ? `${m[3]}/${m[2]}` : "";
+    }
+
+    // Textos entre paréntesis que son datos por completar
+    let cintN = { num: 0, est: 0 };
+    function campoParen(texto, antes, despues) {
+        const t = texto.replace(/\s+/g, " ").trim();
+        if (/^(titular\/ ?familiar \+ nombre|nombre)$/i.test(t) && /PERSONA QUE CONTESTA:\s*$/i.test(antes.replace(/&nbsp;/g, " ").replace(/<[^>]+>/g, "")))
+            return { label: "PERSONA QUE CONTESTA", ph: "Ej: TITULAR - JUAN PÉREZ" };
+        if (/^#x #$/i.test(t)) return { label: "TAP (número)", ph: "Ej: 12" };
+        if (t === "#") return { label: "FAT " + (++cintN.num) + " (número)" };
+        if (/^(no )?saturado\/(no )?saturado$/i.test(t)) {
+            const esTap = /TAP:\s*$/i.test(antes.replace(/&nbsp;/g, " ").replace(/<[^>]+>/g, "").replace(/\(#X #\)\s*$/i, "")) || /^NO SATURADO\/SATURADO$/i.test(t);
+            return { label: esTap ? "TAP (estado)" : "FAT " + (++cintN.est) + " (estado)", tipo: "opciones", opciones: ["SATURADO", "NO SATURADO"] };
+        }
+        if (/^fecha original$/i.test(t)) return { label: "Fecha original", tipo: "fecha" };
+        if (/^nueva fecha$/i.test(t)) return { label: "Nueva fecha", tipo: "fecha" };
+        if (/^fecha$/i.test(t)) return { label: "Fecha", tipo: "fecha" };
+        if (/^cantidad$/i.test(t)) {
+            if (/^\s*repetidor/i.test(despues)) return { label: "Cantidad de repetidores" };
+            if (/^\s*decodificador/i.test(despues)) return { label: "Cantidad de decodificadores" };
+            return { label: "Cantidad" };
+        }
+        if (/^velocidad$/i.test(t)) return { label: "Velocidad", tipo: "velocidad" };
+        if (/^validar si figura dentro del plan$/i.test(t)) {
+            // Liga 1MAX no lleva campo
+            if (/liga\s*1\s*max\s*$/i.test(antes)) return null;
+            return { label: "Validar repetidores", tipo: "oculto" };
+        }
+        if (/^nombre del titular/i.test(t)) return { label: "Nombre del titular" };
+        if (/^tipo de actividad$/i.test(t)) return { label: "Tipo de actividad", tipo: "opciones", opciones: ["Instalación", "Post-venta", "Migración"] };
+        if (/^tipo de post-venta$/i.test(t)) return { label: "Tipo de post-venta", tipo: "opciones", opciones: [
+            "FTTH - WA ENTREGA MESH",
+            "FTTH/SIAC - CAMBIO DE PLAN",
+            "FTTH/SIAC - TRASLADO EXTERNO",
+            "FTTH/SIAC - TRASLADO INTERNO",
+            "HFC/SIAC - CAMBIO DE EQUIPO",
+            "HFC/SIAC - CAMBIO DE PLAN",
+            "HFC/SIAC - TRASLADO EXTERNO",
+            "HFC/SIAC - TRASLADO INTERNO"] };
+        if (/^tarde$/i.test(t)) return { label: "Franja", tipo: "franja" };
+        if (/^indicar cantidad y modelo/i.test(t)) return { label: "Cantidad y modelo de decodificador" };
+        if (/^instalaci[oó]n, post-venta, migraci[oó]n$/i.test(t)) return { label: "Tipo de solicitud", tipo: "opciones", opciones: ["Instalación", "Post-venta", "Migración"] };
+        if (/9\s*am a 1\s*pm|7 a 7:30/i.test(t)) {
+            // "en horario (...)" = visita confirmada; el resto = disponibilidad que se consulta
+            return /en horario\s*$/i.test(antes)
+                ? { label: "Franja de la visita", tipo: "franja" }
+                : { label: "Franja de disponibilidad", tipo: "franja" };
+        }
+        if (/^numero, lt, mz/i.test(t)) return { label: "Dirección" };
+        return null;
+    }
+
+    // Etiquetas tipo "FECHA Y FRANJA:", "FRANJA:" o "FECHA:"
+    function tipoPorEtiqueta(nombre) {
+        if (/franja/i.test(nombre) && /(fecha|d[ií]a)/i.test(nombre)) return "fechafranja";
+        if (/franja/i.test(nombre)) return "franja";
+        if (/^fecha\b/i.test(nombre)) return "fecha";
+        return "texto";
+    }
+
+    function preparar(plantilla) {
+        if (plantilla._campos) return plantilla._campos;
+        cintN = { num: 0, est: 0 };
+        const p = plantilla.querySelector(":scope > p");
+        const campos = [];
+        plantilla._campos = campos;
+        if (!p) return campos;
+        if (p.id === "texto-plantilla-dinamica") return campos; // tiene su propio formulario
+
+        let html = p.innerHTML;
+        let subInfo = null;
+        html = html.replace(/(PERSONA QUE CONTESTA:)(?:&nbsp;|\s)*(?:TITULAR\/ ?FAMILIAR \+ NOMBRE|NOMBRE)(?=<br)/, "$1&nbsp;");
+        if (plantilla.closest("#rechazos-mesa-campo")) {
+            const rxSub = /SUBMOTIVO DE RECHAZO:(?:&nbsp;|\s)*(\([^)]*\))?(?:&nbsp;|\s)*<br>([\s\S]*?)(?=\s*(?:ID DE LLAMADA|PAQUETE INGRESADO|<b>\*\*SE PROCEDE))/;
+            const m = rxSub.exec(html);
+            if (m) {
+                const opciones = [];
+                m[2].split(/<br\s*\/?>/i).forEach((x) => {
+                    const t = x.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim().replace(/^\*+\s*/, "");
+                    if (t && !opciones.includes(t)) opciones.push(t);
+                });
+                if (opciones.length) {
+                    subInfo = { instr: (m[1] || "").replace(/&nbsp;/g, " ").trim(), bloque: m[2].replace(/(<br\s*\/?>)?\s*$/i, ""), opciones };
+                    html = html.replace(rxSub, "SUBMOTIVO DE RECHAZO:&nbsp;<br>§SUBLISTA§");
+                }
+            }
+        }
+        if (plantilla.closest("#sf-reb-no-servicio")) {
+            // Cada situación del cliente (texto en negrita) se puede elegir para ver solo esa respuesta
+            const titulos = [];
+            html = html.replace(/<b>([^<]+)<\/b><br>(?:(?!<b>)[\s\S])*?<br>\s*<br>/g, (m, tit) => {
+                const k = titulos.length;
+                titulos.push(tit.trim());
+                return `<span class="escenario-auto" data-esc="${k}">${m}</span>`;
+            });
+            if (titulos.length) {
+                campos.push({ label: "Situación del cliente", vacio: "", valor: "", raw: {}, tipo: "opciones",
+                    opciones: titulos, escenario: true });
+                p.innerHTML = html;
+                plantilla.classList.add("plantilla--editable");
+                plantilla.title = "Clic para elegir la situación del cliente";
+                return campos;
+            }
+        }
+        html = html.replace(RX_CAMPO, (m, etiqueta) => {
+            if (RX_IGNORAR.test(etiqueta)) return m;
+            if (etiqueta.trim().split(/\s+/).length > 6) return m;
+            const nombre = limpiarEtiqueta(etiqueta);
+            if (!nombre) return m;
+            const i = campos.length;
+            const esEstado = /^(estado|conformidad)$/i.test(nombre) && plantilla.closest("#activaciones");
+            const esEquipo = /^equipo\/material$/i.test(nombre) && plantilla.closest("#gs-espera-equipos");
+            campos.push({
+                label: nombre, vacio: NBSP, valor: "", raw: {},
+                tipo: esEstado ? "opciones" : tipoPorEtiqueta(nombre),
+                opciones: esEstado ? ["PENDIENTE", "ACTIVACIÓN TOTAL", "ACTIVACIÓN PARCIAL"] : undefined,
+                largo: RX_LARGO.test(nombre),
+            });
+            return `${etiqueta}: <span class="campo-auto" data-campo="${i}">${NBSP}</span>`;
+        });
+        html = html
+            .split(/(<[^>]*>)/)
+            .map((parte) => {
+                if (parte.startsWith("<")) return parte;
+                parte = parte.replace(RX_PAREN_O_TIPO, (m, dentro, pos, todo) => {
+                    if (dentro === undefined && /^\[/.test(m)) {
+                        // [Nombre]: un solo campo; si se repite, copia al primero
+                        const k = campos.length;
+                        const primero = campos.findIndex((x) => x.label === "Nombre del cliente");
+                        if (primero >= 0) {
+                            campos.push({ label: "Nombre del cliente (repetido)", vacio: m, valor: "", raw: {}, tipo: "oculto", espejoDe: primero });
+                        } else {
+                            campos.push({ label: "Nombre del cliente", vacio: m, valor: "", raw: {}, tipo: "texto", largo: false });
+                        }
+                        return `<span class="campo-auto" data-campo="${k}">${m}</span>`;
+                    }
+                    if (dentro === undefined) {
+                        // "instalación/migración" -> se elige una de las dos
+                        const k = campos.length;
+                        campos.push({ label: "Tipo de atención", vacio: m, valor: "", raw: {}, tipo: "opciones",
+                            opciones: ["instalación", "migración"], largo: false });
+                        return `<span class="campo-auto" data-campo="${k}">${m}</span>`;
+                    }
+                    const c = campoParen(dentro, todo.slice(0, pos), todo.slice(pos + m.length));
+                    if (!c) return m;
+                    let vinculo;
+                    if (c.tipo === "oculto") {
+                        // se oculta cuando se completa la cantidad de repetidores de esa misma línea
+                        for (let k = campos.length - 1; k >= 0; k--) {
+                            if (campos[k].label === "Cantidad de repetidores") { vinculo = k; break; }
+                        }
+                        if (vinculo === undefined) return m;
+                    }
+                    let copiaDe;
+                    if (c.label === "Franja de la visita") {
+                        for (let k = campos.length - 1; k >= 0; k--) {
+                            if (campos[k].label === "Franja de disponibilidad") { copiaDe = k; break; }
+                        }
+                    }
+                    const i = campos.length;
+                    campos.push({ label: c.label, vacio: m, valor: "", raw: {}, tipo: c.tipo || "texto", opciones: c.opciones, vinculo, copiaDe, largo: false });
+                    return `<span class="campo-auto" data-campo="${i}">${m}</span>`;
+                });
+                return parte.replace(RX_BLANCO, (blanco, pos, todo) => {
+                    const antes = todo.slice(0, pos).replace(/&nbsp;/g, " ").trim().split(/\s+/);
+                    const crudo = limpiarEtiqueta(antes.slice(-3).join(" ")) || "Dato";
+                    const ctx = /distrito/i.test(crudo) ? "Distrito"
+                        : /direcci[oó]n|instalaci[oó]n es/i.test(crudo) ? "Dirección" : crudo;
+                    const i = campos.length;
+                    campos.push({ label: ctx, vacio: blanco, valor: "", raw: {}, tipo: "texto", largo: false });
+                    return `<span class="campo-auto" data-campo="${i}">${blanco}</span>`;
+                });
+            })
+            .join("");
+
+        const listaEq = !campos.length && plantilla.closest('[id^="gs-espera-equipos-"]');
+        if (listaEq) {
+            // Listas de equipos: se completan con casillas y la plantilla queda solo con lo ingresado
+            const tec = { label: "Tecnología", tipo: "opciones", opciones: ["HFC", "FTTH"] };
+            const antepone = (pre, t) => (!t ? "" : new RegExp("^" + pre.split(" ")[0], "i").test(t) ? t : pre + " " + t);
+            const planes = {
+                "gs-espera-equipos-repetidores": {
+                    campos: [{ label: "Modelo del repetidor", tipo: "texto", ph: "Ej: AR1344E2 KAON" }],
+                    render: (v) => (v[0] ? "MATERIAL: " + antepone("REPETIDOR", v[0]) : ""),
+                },
+                "gs-espera-equipos-emta": {
+                    campos: [tec, { label: "Modelo del EMTA", tipo: "texto", ph: "Ej: ARRIS TG2482 24X8 3.0 S/BAT" }],
+                    render: (v) => [v[0], v[1] ? antepone(v[0] === "FTTH" ? "MODEM ROUTER" : "MODEM", v[1]) : ""].filter(Boolean).join("\n"),
+                },
+                "gs-espera-equipos-materiales-cambio": {
+                    campos: [{ label: "Cantidad de DROP", tipo: "numero", sufijo: "metros", ph: "Ej: 85" }],
+                    render: (v) => (v[0] ? `DROP ${v[0]} METROS` : ""),
+                },
+                "gs-espera-equipos-decos": {
+                    campos: [tec, { label: "Modelo del decodificador", tipo: "texto", ph: "Ej: HD DCX700" }],
+                    render: (v) => [v[0], v[1] ? antepone("DECODIFICADOR", v[1]) : ""].filter(Boolean).join("\n"),
+                },
+            };
+            const idLista = listaEq.id;
+            const plan = planes[idLista];
+            if (plan) {
+                plan.campos.forEach((c) => campos.push({ vacio: "", valor: "", raw: {}, largo: false, grupo: true, ...c }));
+                plantilla._render = plan.render;
+                html = `<span class="lista-original">${html.replace(/\s*$/, "")}</span>` +
+                    `<span class="campo-auto" data-campo="0" style="white-space:pre-line"></span>`;
+            }
+        }
+        if (subInfo) {
+            html = html.replace("<br>§SUBLISTA§",
+                `<span class="sub-lista">${subInfo.instr ? " " + subInfo.instr : ""}<br>${subInfo.bloque}</span><br>`);
+            const sub = campos.find((c) => /^submotivo de rechazo$/i.test(c.label));
+            if (sub) { sub.tipo = "opciones"; sub.sublista = true; sub.opciones = subInfo.opciones; }
+        }
+        if (campos.length && plantilla.closest("#gs-ciclo-llamadas")) {
+            // SUB-MOTIVO: se elige una opción y la lista completa desaparece
+            const sub = campos.find((c) => /^sub-?motivo$/i.test(c.label));
+            const rx = /(SUB-MOTIVO: <span class="campo-auto"[^>]*>[^<]*<\/span>)<br>\s*(Buz[oó]n de voz<br>[\s\S]*?\(Escoger una opci[oó]n\))<br>/;
+            if (sub && rx.test(html)) {
+                html = html.replace(rx, '$1<span class="sub-lista"><br>$2</span><br>');
+                sub.tipo = "opciones";
+                sub.sublista = true;
+                sub.opciones = ["Buzón de voz", "No contesta", "Número no existe", "Apagado", "Corta llamada"];
+            }
+        }
+        if (campos.length && plantilla.closest("#val-instalacion-cn")) {
+            // Correo corporativo: se elige "CN - CORREO CORPORATIVO" (con correo) o "CN - NO CUENTA..."
+            const rx = /CN - CORREO CORPORATIVO:\s*CN - NO CUENTA CORREO CORPORATIVO DETALLAR: SINCORREO@CLIENTE\.COM(&nbsp;)?/;
+            if (rx.test(html)) {
+                const kOpc = campos.length, kMail = kOpc + 1;
+                html = html.replace(rx,
+                    `<span class="cn-si">CN - CORREO CORPORATIVO: <span class="campo-auto" data-campo="${kMail}">${NBSP}</span></span> ` +
+                    `<span class="cn-no">CN - NO CUENTA CORREO CORPORATIVO DETALLAR: SINCORREO@CLIENTE.COM</span>${NBSP}`);
+                campos.push({ label: "Correo corporativo", vacio: "", valor: "", raw: {}, tipo: "opciones", cn: true,
+                    opciones: ["CN - CORREO CORPORATIVO", "CN - NO CUENTA CORREO CORPORATIVO DETALLAR"] });
+                campos.push({ label: "Correo del cliente", vacio: NBSP, valor: "", raw: {}, tipo: "texto", largo: false });
+                // se ubican justo antes de NUMERO WSP y se renumeran los campos
+                const orden = campos.map((_, i) => i);
+                const w = campos.findIndex((c) => /^numero wsp$/i.test(c.label));
+                if (w >= 0) {
+                    orden.splice(orden.indexOf(kOpc), 2);
+                    orden.splice(orden.indexOf(w), 0, kOpc, kMail);
+                }
+                const nuevo = {};
+                orden.forEach((viejo, n) => (nuevo[viejo] = n));
+                html = html.replace(/data-campo="(\d+)"/g, (m, v) => `data-campo="${nuevo[v]}"`);
+                const copia = orden.map((v) => campos[v]);
+                campos.length = 0;
+                copia.forEach((c) => campos.push(c));
+            }
+        }
+        if (campos.length) {
+            p.innerHTML = html;
+            const cuenta = {};
+            campos.forEach((c) => (cuenta[c.label] = (cuenta[c.label] || 0) + 1));
+            const usados = {};
+            campos.forEach((c) => {
+                if (cuenta[c.label] > 1) {
+                    usados[c.label] = (usados[c.label] || 0) + 1;
+                    c.label += " " + usados[c.label];
+                }
+            });
+            plantilla.classList.add("plantilla--editable");
+            plantilla.title = "Clic para completar los datos";
+        }
+        return campos;
+    }
+
+    function crearPanel() {
+        const el = document.createElement("div");
+        el.className = "plantilla-flotante";
+        el.innerHTML =
+            `<div class="plantilla-flotante__cabecera">` +
+            `<strong class="plantilla-flotante__titulo">Completar plantilla</strong>` +
+            `<span class="plantilla-flotante__ventana">` +
+            `<button type="button" class="plantilla-flotante__btn" data-acc="min" aria-label="Minimizar" title="Minimizar">` +
+            `<svg viewBox="0 0 12 12" width="12" height="12"><path d="M1 6h10" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>` +
+            `<button type="button" class="plantilla-flotante__btn plantilla-flotante__cerrar" data-acc="cerrar" aria-label="Cerrar" title="Cerrar">` +
+            `<svg viewBox="0 0 12 12" width="12" height="12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></button>` +
+            `</span>` +
+            `</div>` +
+            `<div class="plantilla-flotante__campos"></div>` +
+            `<div class="plantilla-flotante__pie">` +
+            `<button type="button" class="plantilla-flotante__limpiar">Limpiar</button>` +
+            `<button type="button" class="plantilla-flotante__copiar">Copiar plantilla</button>` +
+            `</div>`;
+        document.body.appendChild(el);
+
+        el.querySelector('[data-acc="cerrar"]').addEventListener("click", cerrar);
+        el.querySelector('[data-acc="min"]').addEventListener("click", () => {
+            el.classList.toggle("plantilla-flotante--min");
+        });
+        hacerArrastrable(el, el.querySelector(".plantilla-flotante__cabecera"));
+        el.querySelector(".plantilla-flotante__limpiar").addEventListener("click", () => {
+            if (!activa) return;
+            activa._campos.forEach((c, i) => { c.raw = {}; asignar(i, ""); });
+            el.querySelectorAll("input, textarea, select").forEach((x) => (x.value = ""));
+            const primero = el.querySelector("input, textarea, select");
+            if (primero) primero.focus();
+        });
+        el.querySelector(".plantilla-flotante__copiar").addEventListener("click", () => {
+            if (!activa) return;
+            const p = activa.querySelector(":scope > p");
+            navigator.clipboard.writeText(p.innerText || p.textContent).then(
+                () => typeof mostrarToast === "function" && mostrarToast("Plantilla copiada"),
+                () => typeof mostrarToast === "function" && mostrarToast("Error al copiar")
+            );
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && activa) cerrar();
+        });
+        return el;
+    }
+
+    // Permite mover el panel arrastrando su cabecera
+    function hacerArrastrable(el, asa) {
+        asa.classList.add("plantilla-flotante__asa");
+        let dx = 0, dy = 0, arrastrando = false;
+        asa.addEventListener("pointerdown", (e) => {
+            if (e.target.closest("button")) return;
+            const r = el.getBoundingClientRect();
+            // pasa de right/bottom a left/top para poder moverlo libremente
+            el.style.left = r.left + "px";
+            el.style.top = r.top + "px";
+            el.style.right = "auto";
+            el.style.bottom = "auto";
+            dx = e.clientX - r.left;
+            dy = e.clientY - r.top;
+            arrastrando = true;
+            asa.setPointerCapture(e.pointerId);
+            e.preventDefault();
+        });
+        asa.addEventListener("pointermove", (e) => {
+            if (!arrastrando) return;
+            const x = Math.min(Math.max(0, e.clientX - dx), Math.max(0, window.innerWidth - el.offsetWidth));
+            const y = Math.min(Math.max(0, e.clientY - dy), window.innerHeight - 50);
+            el.style.left = x + "px";
+            el.style.top = y + "px";
+        });
+        const soltar = (e) => {
+            arrastrando = false;
+            if (asa.hasPointerCapture && asa.hasPointerCapture(e.pointerId)) asa.releasePointerCapture(e.pointerId);
+        };
+        asa.addEventListener("pointerup", soltar);
+        asa.addEventListener("pointercancel", soltar);
+    }
+
+    function asignar(i, valor) {
+        const campo = activa._campos[i];
+        campo.valor = valor;
+        if (campo.grupo) {
+            const vals = activa._campos.map((c) => (c.valor || "").trim());
+            const lista = activa.querySelector(".lista-original");
+            if (lista) lista.style.display = vals.some(Boolean) ? "none" : "";
+            const destino0 = activa.querySelector('.campo-auto[data-campo="0"]');
+            if (destino0) {
+                const t = activa._render(vals);
+                destino0.textContent = t;
+                destino0.classList.toggle("campo-auto--lleno", !!t);
+            }
+            return;
+        }
+        if (campo.sublista) {
+            const lista = activa.querySelector(".sub-lista");
+            if (lista) lista.style.display = valor ? "none" : "";
+        }
+        if (campo.cn) {
+            const si = activa.querySelector(".cn-si"), no = activa.querySelector(".cn-no");
+            const elegido = campo.opciones.indexOf(valor);
+            if (si) si.style.display = elegido === 1 ? "none" : "";
+            if (no) no.style.display = elegido === 0 ? "none" : "";
+            return;
+        }
+        if (campo.escenario) {
+            const elegido = campo.opciones.indexOf(valor);
+            activa.querySelectorAll(".escenario-auto").forEach((el) => {
+                el.style.display = elegido >= 0 && Number(el.dataset.esc) !== elegido ? "none" : "";
+            });
+            return;
+        }
+        const destino = activa.querySelector(`.campo-auto[data-campo="${i}"]`);
+        if (!destino) return;
+        if (campo.reemplazaLista) {
+            const lista = activa.querySelector(".lista-original");
+            if (lista) lista.style.display = valor ? "none" : "";
+        }
+        destino.textContent = valor ? (campo.prefijo || "") + valor : campo.vacio;
+        destino.classList.toggle("campo-auto--lleno", !!valor);
+        if (/^(Nombre del (titular|cliente)|Cliente)$/i.test(campo.label)) compartido.nombre = valor;
+        activa._campos.forEach((otro, j) => {
+            if (otro.espejoDe !== i) return;
+            const d = activa.querySelector(`.campo-auto[data-campo="${j}"]`);
+            if (!d) return;
+            d.textContent = valor || otro.vacio;
+            d.classList.toggle("campo-auto--lleno", !!valor);
+        });
+        // campos ligados: si este se completa, el texto de instrucción ligado desaparece
+        activa._campos.forEach((otro, j) => {
+            if (otro.vinculo !== i) return;
+            const d = activa.querySelector(`.campo-auto[data-campo="${j}"]`);
+            if (d) d.textContent = valor ? "" : otro.vacio;
+        });
+    }
+
+    // Lee los equipos de las 4 plantillas "En espera de equipos: ..." para no repetirlos a mano
+    function catalogoEquipos() {
+        const fuentes = [
+            ["gs-espera-equipos-repetidores", "Repetidores"],
+            ["gs-espera-equipos-emta", "EMTA"],
+            ["gs-espera-equipos-decos", "Decodificadores"],
+            ["gs-espera-equipos-materiales", "Materiales de cambio"],
+        ];
+        const grupos = [];
+        const id2 = (id) => document.getElementById(id) || null;
+        const items = document.querySelectorAll('[id^="gs-espera-equipos-"]');
+        const porTitulo = {};
+        items.forEach((d) => (porTitulo[d.querySelector("h3")?.textContent.trim().replace(/^En espera de equipos:\s*/i, "")] = d));
+        fuentes.forEach(([id, nombre]) => {
+            const d = id2(id) || Object.entries(porTitulo).find(([t]) => t && t.toLowerCase().startsWith(nombre.toLowerCase().slice(0, 5)))?.[1];
+            const p = d && d.querySelector(".plantilla > p");
+            if (!p) return;
+            let sub = "";
+            const lista = [];
+            p.innerText.split("\n").forEach((l) => {
+                const t = l.replace(/\u00a0/g, " ").replace(/^MATERIAL:\s*/i, "").replace(/"+$/, "").trim();
+                if (!t) return;
+                if (/^(hfc|ftth|fthh)$/i.test(t)) { sub = t.toUpperCase().replace("FTHH", "FTTH"); return; }
+                lista.push({ sub, texto: t });
+            });
+            const porSub = {};
+            lista.forEach((x) => (porSub[x.sub] = porSub[x.sub] || []).push(x.texto));
+            Object.entries(porSub).forEach(([sub, arr]) => grupos.push({ titulo: sub ? `${nombre} ${sub}` : nombre, items: arr }));
+        });
+        return grupos;
+    }
+
+    function crearSelectFranja(valorActual) {
+        const sel = document.createElement("select");
+        sel.innerHTML = `<option value="">Seleccionar franja</option>` +
+            FRANJAS.map((f) => `<option value="${f.texto}">${f.codigo} (${f.texto})</option>`).join("");
+        sel.value = valorActual || "";
+        return sel;
+    }
+
+    function crearCampo(c, i, inputs) {
+        const fila = document.createElement(c.tipo === "multi" ? "div" : "label");
+        fila.className = "plantilla-form__campo";
+        fila.dataset.i = i;
+        const span = document.createElement("span");
+        span.textContent = c.label;
+        fila.appendChild(span);
+
+        let control;
+        if (c.tipo === "fecha") {
+            control = document.createElement("input");
+            control.type = "date";
+            control.value = c.raw.fecha || "";
+            control.addEventListener("input", () => {
+                c.raw.fecha = control.value;
+                asignar(i, formatoFecha(control.value));
+            });
+            fila.appendChild(control);
+        } else if (c.tipo === "franja") {
+            control = crearSelectFranja(c.raw.franja);
+            control.addEventListener("change", () => {
+                c.raw.franja = control.value;
+                if (c.copiaDe !== undefined) c.raw.manual = true; // la cambió a mano
+                asignar(i, control.value);
+                // las franjas de visita que dependen de esta se llenan solas (si no se tocaron)
+                activa._campos.forEach((otro, j) => {
+                    if (otro.copiaDe !== i || otro.raw.manual) return;
+                    otro.raw.franja = control.value;
+                    asignar(j, control.value);
+                    const sel = panel.querySelector(`.plantilla-form__campo[data-i="${j}"] select`);
+                    if (sel) sel.value = control.value;
+                });
+            });
+            fila.appendChild(control);
+        } else if (c.tipo === "multi") {
+            fila.replaceWith && fila.classList.add("plantilla-form__campo--multi");
+            const caja = document.createElement("div");
+            caja.className = "plantilla-form__multi";
+            c.raw.sel = c.raw.sel || [];
+            const otro = document.createElement("input");
+            otro.type = "text";
+            otro.placeholder = "Otro equipo (escribir)";
+            otro.value = c.raw.otro || "";
+            const refrescar = () => {
+                c.raw.otro = otro.value.trim();
+                asignar(i, [...c.raw.sel, c.raw.otro].filter(Boolean).join(" / "));
+            };
+            catalogoEquipos().forEach((g) => {
+                const t = document.createElement("div");
+                t.className = "plantilla-form__multi-titulo";
+                t.textContent = g.titulo;
+                caja.appendChild(t);
+                g.items.forEach((it) => {
+                    const l = document.createElement("div");
+                    l.className = "plantilla-form__multi-item";
+                    const ch = document.createElement("input");
+                    ch.type = "checkbox";
+                    ch.checked = c.raw.sel.includes(it);
+                    const tx = document.createElement("span");
+                    tx.textContent = it;
+                    l.append(ch, tx);
+                    l.addEventListener("click", (e) => { if (e.target !== ch) { ch.checked = !ch.checked; } 
+                        c.raw.sel = c.raw.sel.filter((x) => x !== it);
+                        if (ch.checked) c.raw.sel.push(it);
+                        refrescar(); });
+                    caja.appendChild(l);
+                });
+            });
+            otro.addEventListener("input", refrescar);
+            fila.append(caja, otro);
+            control = otro;
+        } else if (c.tipo === "numero") {
+            const caja = document.createElement("div");
+            caja.className = "plantilla-form__sufijo";
+            control = document.createElement("input");
+            control.type = "number";
+            control.min = "0";
+            control.step = "1";
+            control.inputMode = "numeric";
+            control.placeholder = c.ph || "";
+            control.value = c.valor || "";
+            control.addEventListener("input", () => asignar(i, control.value.replace(/\D/g, "")));
+            const u = document.createElement("em");
+            u.textContent = c.sufijo || "";
+            caja.append(control, u);
+            fila.appendChild(caja);
+        } else if (c.tipo === "velocidad") {
+            // solo números; la unidad MB va fija para que nadie escriba otra cosa
+            const caja = document.createElement("div");
+            caja.className = "plantilla-form__sufijo";
+            control = document.createElement("input");
+            control.type = "number";
+            control.min = "1";
+            control.step = "1";
+            control.inputMode = "numeric";
+            control.placeholder = "Ej: 500";
+            control.value = c.raw.numero || "";
+            control.addEventListener("input", () => {
+                const n = control.value.replace(/\D/g, "");
+                c.raw.numero = n;
+                asignar(i, n ? `${n} MB` : "");
+            });
+            const u = document.createElement("em");
+            u.textContent = "MB";
+            caja.append(control, u);
+            fila.appendChild(caja);
+        } else if (c.tipo === "opciones") {
+            control = document.createElement("select");
+            control.innerHTML = `<option value="">Seleccionar</option>` +
+                c.opciones.map((o) => `<option value="${o}">${o}</option>`).join("");
+            control.value = c.valor || "";
+            control.addEventListener("change", () => asignar(i, control.value));
+            fila.appendChild(control);
+        } else if (c.tipo === "fechafranja") {
+            const dupla = document.createElement("div");
+            dupla.className = "plantilla-form__dupla";
+            control = document.createElement("input");
+            control.type = "date";
+            control.value = c.raw.fecha || "";
+            const sel = crearSelectFranja(c.raw.franja);
+            const actualizar = () => {
+                c.raw.fecha = control.value;
+                c.raw.franja = sel.value;
+                asignar(i, [formatoFecha(control.value), sel.value].filter(Boolean).join(" "));
+            };
+            control.addEventListener("input", actualizar);
+            sel.addEventListener("change", actualizar);
+            dupla.append(control, sel);
+            fila.appendChild(dupla);
+        } else {
+            control = document.createElement(c.largo ? "textarea" : "input");
+            if (c.largo) control.rows = c.filas || 2; else control.type = "text";
+            control.autocomplete = "off";
+            control.spellcheck = false;
+            control.placeholder = c.ph || c.label;
+            control.value = c.valor;
+            control.addEventListener("input", () => asignar(i, control.value.trim()));
+            fila.appendChild(control);
+        }
+
+        inputs.push(control);
+        const pos = inputs.length - 1;
+        if (!c.largo && c.tipo === "texto") {
+            control.addEventListener("keydown", (e) => {
+                if (e.key !== "Enter") return;
+                e.preventDefault();
+                const sig = inputs[pos + 1];
+                if (sig) sig.focus();
+                else panel.querySelector(".plantilla-flotante__copiar").focus();
+            });
+        }
+        return fila;
+    }
+
+    // Busca una plantilla por el inicio de su título (ej. "2.2")
+    function plantillaPorTitulo(prefijo) {
+        for (const item of document.querySelectorAll(".container__grid__item")) {
+            const h = item.querySelector("h3");
+            if (h && h.textContent.trim().startsWith(prefijo)) return item.querySelector(".plantilla");
+        }
+        return null;
+    }
+
+    function irAPlantilla(pl) {
+        if (!pl) return;
+        pl.scrollIntoView({ behavior: "smooth", block: "center" });
+        abrir(pl);
+    }
+
+    // 2.2 Reprogramación en mesa -> Plantilla Dinámica de Reprogramaciones (con datos ya cargados)
+    const FRANJA_A_CODIGO = { "9AM A 1PM": "AM1", "2PM A 6PM": "PM1", "7 A 7:30AM": "AM0" };
+
+    function crearIrReprogramacion(plantilla, enCampo) {
+        const caja = document.createElement("div");
+        caja.className = "plantilla-flujo";
+        const t = document.createElement("div");
+        t.className = "plantilla-flujo__titulo";
+        t.textContent = "Registrar la reprogramación";
+        const info = document.createElement("div");
+        info.className = "plantilla-flujo__aviso";
+        info.textContent = "Lleva el nombre, la nueva fecha y la franja a la Plantilla Dinámica de Reprogramaciones.";
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "plantilla-flujo__ir";
+        btn.textContent = "Ir a Plantilla Dinámica de Reprogramaciones";
+        caja.append(t, info, btn);
+
+        btn.addEventListener("click", () => {
+            const campos = plantilla._campos;
+            const fechas = campos.filter((c) => c.tipo === "fecha" && c.raw.fecha);
+            const nueva = fechas.length ? fechas[fechas.length - 1].raw.fecha : ""; // la fecha de la visita reprogramada
+            const franja = (campos.find((c) => c.label.startsWith("Franja de disponibilidad") && c.raw.franja)
+                || campos.find((c) => c.label.startsWith("Franja de la visita") && c.raw.franja)
+                || campos.find((c) => c.label === "Franja" && c.raw.franja) || { raw: {} }).raw.franja;
+
+            const poner = (id, valor) => {
+                const el = document.getElementById(id);
+                if (!el || !valor) return;
+                el.value = valor;
+                el.dispatchEvent(new Event("input", { bubbles: true }));
+                el.dispatchEvent(new Event("change", { bubbles: true }));
+            };
+            poner("tipo-reprogramado", enCampo ? "CAMPO" : "MESA");
+            poner("nombre-cliente", compartido.nombre);
+            poner("fecha-visita", nueva);
+            poner("franja-visita", FRANJA_A_CODIGO[franja]);
+
+            const destino = document.getElementById("repro-mesa-cliente");
+            if (destino) destino.scrollIntoView({ behavior: "smooth", block: "center" });
+            cerrar();
+        });
+        return caja;
+    }
+
+    // 2.1 Reconfirmación: SÍ / NO -> reprogramar (2.2) o rechazo (4. Rebates)
+    function crearFlujoReconfirmacion() {
+        const caja = document.createElement("div");
+        caja.className = "plantilla-flujo";
+        const crearSel = (etiqueta, opciones) => {
+            const fila = document.createElement("label");
+            fila.className = "plantilla-form__campo";
+            const sp = document.createElement("span");
+            sp.textContent = etiqueta;
+            const sel = document.createElement("select");
+            sel.innerHTML = `<option value="">Seleccionar</option>` +
+                opciones.map(([v, t]) => `<option value="${v}">${t}</option>`).join("");
+            fila.append(sp, sel);
+            return { fila, sel };
+        };
+        const titulo = document.createElement("div");
+        titulo.className = "plantilla-flujo__titulo";
+        titulo.textContent = "Respuesta del cliente";
+        caja.appendChild(titulo);
+
+        const resp = crearSel("¿Confirma la visita?", [["si", "SÍ"], ["no", "NO"]]);
+        const decision = crearSel("¿Qué decide el cliente?", [["reprog", "Reprogramar la visita"], ["rechazo", "Rechaza el servicio"]]);
+        const rebates = [...document.querySelectorAll('[id^="sf-reb-"]')].map((d, k) => [
+            String(k), d.querySelector("h3")?.textContent.trim() || `Rebate ${k + 1}`]);
+        const reb = crearSel("Rebate a usar", rebates);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "plantilla-flujo__ir";
+        const aviso = document.createElement("div");
+        aviso.className = "plantilla-flujo__aviso";
+        caja.append(resp.fila, decision.fila, reb.fila, btn, aviso);
+
+        const actualizar = () => {
+            const r = resp.sel.value, d = decision.sel.value;
+            decision.fila.style.display = r === "no" ? "" : "none";
+            reb.fila.style.display = r === "no" && d === "rechazo" ? "" : "none";
+            btn.style.display = "none";
+            aviso.textContent = "";
+            if (r === "si") {
+                btn.textContent = "Ir a la plantilla Confirma visita en llamada";
+                btn.style.display = "";
+            } else if (r === "no" && d === "reprog") {
+                btn.textContent = "Ir a 2.2 Reprogramación en mesa";
+                btn.style.display = "";
+            } else if (r === "no" && d === "rechazo" && reb.sel.value !== "") {
+                btn.textContent = "Ir a 4. Rebates ante un rechazo";
+                btn.style.display = "";
+            }
+        };
+        [resp.sel, decision.sel, reb.sel].forEach((x) => x.addEventListener("change", actualizar));
+        btn.addEventListener("click", () => {
+            if (resp.sel.value === "si") {
+                irAPlantilla(document.querySelector("#gs-confirmacion-visita .plantilla"));
+                return;
+            }
+            if (resp.sel.value !== "no") return;
+            if (decision.sel.value === "reprog") {
+                irAPlantilla(plantillaPorTitulo("2.2"));
+            } else if (decision.sel.value === "rechazo" && reb.sel.value !== "") {
+                const d = document.querySelectorAll('[id^="sf-reb-"]')[Number(reb.sel.value)];
+                irAPlantilla(d && d.querySelector(".plantilla"));
+            }
+        });
+        actualizar();
+        return caja;
+    }
+
+    function abrir(plantilla) {
+        const campos = preparar(plantilla);
+        if (!campos.length) return;
+        if (!panel) panel = crearPanel();
+        if (activa) activa.classList.remove("plantilla--activa");
+        activa = plantilla;
+        plantilla.classList.add("plantilla--activa");
+
+        const titulo = plantilla.closest(".container__grid__item")?.querySelector("h3")?.textContent.trim();
+        panel.querySelector(".plantilla-flotante__titulo").textContent = titulo || "Completar plantilla";
+
+        // el nombre ya escrito en otra plantilla se reutiliza
+        if (compartido.nombre) {
+            campos.forEach((c, i) => {
+                if (/^(Nombre del (titular|cliente)|Cliente)$/i.test(c.label) && !c.valor) asignar(i, compartido.nombre);
+            });
+        }
+
+        const cont = panel.querySelector(".plantilla-flotante__campos");
+        cont.innerHTML = "";
+        const grid = document.createElement("div");
+        grid.className = "plantilla-form__grid";
+        cont.appendChild(grid);
+
+        const inputs = [];
+        campos.forEach((c, i) => { if (c.tipo !== "oculto") grid.appendChild(crearCampo(c, i, inputs)); });
+        if (/^2\.1\b/.test(titulo || "")) grid.appendChild(crearFlujoReconfirmacion());
+        if (/^2\.[23]\b/.test(titulo || "")) grid.appendChild(crearIrReprogramacion(plantilla, /^2\.3\b/.test(titulo)));
+
+        panel.classList.remove("plantilla-flotante--min");
+        panel.classList.add("plantilla-flotante--abierta");
+        // si quedó fuera de la pantalla (por arrastrarlo o cambiar el tamaño), se vuelve a meter
+        const r = panel.getBoundingClientRect();
+        if (r.right > window.innerWidth || r.left < 0 || r.bottom > window.innerHeight || r.top < 0) {
+            panel.style.left = Math.max(8, Math.min(r.left, window.innerWidth - r.width - 8)) + "px";
+            panel.style.top = Math.max(8, Math.min(r.top, window.innerHeight - Math.min(r.height, window.innerHeight - 16) - 8)) + "px";
+            panel.style.right = "auto";
+            panel.style.bottom = "auto";
+        }
+        if (inputs[0]) inputs[0].focus();
+    }
+
+    function cerrar() {
+        if (!panel) return;
+        panel.classList.remove("plantilla-flotante--abierta");
+        if (activa) activa.classList.remove("plantilla--activa");
+        activa = null;
+    }
+
+    function iniciar() {
+        document.querySelectorAll(".plantilla").forEach(preparar);
+        document.addEventListener("click", (e) => {
+            if (e.target.closest(".copiar-contenedor, .plantilla-flotante, a, button, input, textarea, select")) return;
+            const pl = e.target.closest(".plantilla");
+            if (pl && pl.classList.contains("plantilla--editable")) abrir(pl);
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => setTimeout(iniciar, 0));
+    } else {
+        setTimeout(iniciar, 0);
+    }
+})();
+
+    </script>
 
     <script>
         // Speech Fija Masiva: completa saludo, fecha y nombre del asesor si el script general no lo hizo
