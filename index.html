@@ -1508,6 +1508,33 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container__grid__item">
+                            <div id="sf-rechazo-dilacion">
+                                <h3>2.4 Motivo de rechazo por alta dilación</h3>
+                                <div class="plantilla">
+                                    <p>
+                                        <b>MESA MULTISKILL HITSS</b><br>
+                                        RECHAZO EN MESA / CAMPO:&nbsp;RECHAZADO EN MESA<br>
+                                        PERSONA QUE CONTESTA:&nbsp;<br>
+                                        NUMERO DE CONTACTO:&nbsp;<br>
+                                        MOTIVO DEL RECHAZO:&nbsp;FACILIDADES TÉCNICAS DEL CLIENTE<br>
+                                        SUBMOTIVO DE RECHAZO:&nbsp;(Escoger 1 opción)<br>
+                                        * Dueño de Casa y/o Edificio no autoriza la instalacion.<br>
+                                        Al momento de la instalación no hay acceso al techo<br>
+                                        * Cliente solicita visita en fecha lejana<br>
+                                        ID DE LLAMADA:&nbsp;<br>
+                                        REALIZADO POR:&nbsp;<span class="adp"></span> - ADP MULTISKILL HITSS
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <h3 style="margin-top:2rem;">3. Speech de Validación</h3>
@@ -5468,14 +5495,15 @@
         let html = p.innerHTML;
         let subInfo = null;
         html = html.replace(/(PERSONA QUE CONTESTA:)(?:&nbsp;|\s)*(?:TITULAR\/ ?FAMILIAR \+ NOMBRE|NOMBRE)(?=<br)/, "$1&nbsp;");
-        if (plantilla.closest("#rechazos-mesa-campo")) {
+        if (plantilla.closest("#rechazos-mesa-campo, #sf-rechazo-dilacion")) {
             const rxSub = /SUBMOTIVO DE RECHAZO:(?:&nbsp;|\s)*(\([^)]*\))?(?:&nbsp;|\s)*<br>([\s\S]*?)(?=\s*(?:ID DE LLAMADA|PAQUETE INGRESADO|<b>\*\*SE PROCEDE))/;
             const m = rxSub.exec(html);
             if (m) {
                 const opciones = [];
                 m[2].split(/<br\s*\/?>/i).forEach((x) => {
                     const t = x.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim().replace(/^\*+\s*/, "");
-                    if (t && !opciones.includes(t)) opciones.push(t);
+                    if (/^Al momento de la instalación no hay acceso/i.test(t) && opciones.length) opciones[opciones.length - 1] += " / " + t;
+                    else if (t && !opciones.includes(t)) opciones.push(t);
                 });
                 if (opciones.length) {
                     subInfo = { instr: (m[1] || "").replace(/&nbsp;/g, " ").trim(), bloque: m[2].replace(/(<br\s*\/?>)?\s*$/i, ""), opciones };
