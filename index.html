@@ -608,6 +608,11 @@
                                     fraude</a>
                             </li>
 
+                            <li class="list__inside">
+                                <a href="#rmc-por-alta-dilacion-mesa" class="nav__link nav__link--inside">Por alta
+                                    dilación</a>
+                            </li>
+
 
                         </ul>
 
@@ -1497,33 +1502,6 @@
                                         <span class="saludo-dinamico"></span>. Le saluda <span class="adp"></span> de parte del área de programación de Claro. ¿Me comunico con (Nombre del Titular, nombre completo)? Le llamamos por la solicitud de (tipo de actividad). Nuestro técnico nos informa que no es posible atenderlo en este momento, ¿nos podría indicar por favor el motivo?<br>
                                         <br>
                                         De acuerdo, ¿podemos programar una nueva visita el día de hoy por la (tarde)? (o según disponibilidad del cliente). Su nueva visita queda agendada para el día (fecha) en el rango (9AM a 1pm / de 2PM a 6PM). Muchas gracias por su atención. ¡Que tenga un buen día!
-                                    </p>
-                                    <div class="copiar-contenedor">
-                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
-                                            <span class="material-symbols-outlined"
-                                                style="color: rgb(101, 101, 101);">content_copy</span>
-                                        </span>
-                                        <span class="copiado hidden">Copiado!</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container__grid__item">
-                            <div id="sf-rechazo-dilacion">
-                                <h3>2.4 Motivo de rechazo por alta dilación</h3>
-                                <div class="plantilla">
-                                    <p>
-                                        <b>MESA MULTISKILL HITSS</b><br>
-                                        RECHAZO EN MESA / CAMPO:&nbsp;RECHAZADO EN MESA<br>
-                                        PERSONA QUE CONTESTA:&nbsp;<br>
-                                        NUMERO DE CONTACTO:&nbsp;<br>
-                                        MOTIVO DEL RECHAZO:&nbsp;FACILIDADES TÉCNICAS DEL CLIENTE<br>
-                                        SUBMOTIVO DE RECHAZO:&nbsp;(Escoger 1 opción)<br>
-                                        * Dueño de Casa y/o Edificio no autoriza la instalacion.<br>
-                                        Al momento de la instalación no hay acceso al techo<br>
-                                        * Cliente solicita visita en fecha lejana<br>
-                                        ID DE LLAMADA:&nbsp;<br>
-                                        REALIZADO POR:&nbsp;<span class="adp"></span> - ADP MULTISKILL HITSS
                                     </p>
                                     <div class="copiar-contenedor">
                                         <span class="copy-icon" onclick="copiarPlantilla(this)">
@@ -4067,9 +4045,62 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container__grid__item">
+                            <div id="rmc-por-alta-dilacion-mesa">
+                                <h3>Por alta dilación - Mesa</h3>
 
+                                <div class="plantilla">
+                                    <p id="texto-plantilla">
+                                        <b>MESA MULTISKILL HITSS</b><br>
+                                        RECHAZO EN MESA / CAMPO:&nbsp;RECHAZADO EN MESA<br>
+                                        PERSONA QUE CONTESTA:&nbsp;<br>
+                                        NUMERO DE CONTACTO:&nbsp;<br>
+                                        MOTIVO DEL RECHAZO:&nbsp;FACILIDADES TÉCNICAS DEL CLIENTE<br>
+                                        SUBMOTIVO DE RECHAZO:&nbsp;(Escoger 1 opción)<br>
+                                        * Dueño de Casa y/o Edificio no autoriza la instalacion.<br>
+                                        Al momento de la instalación no hay acceso al techo<br>
+                                        * Cliente solicita visita en fecha lejana<br>
+                                        ID DE LLAMADA:&nbsp;<br>
+                                        REALIZADO POR:&nbsp;<span class="adp"></span> - ADP MULTISKILL HITSS
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__grid__item">
+                            <div id="rmc-por-alta-dilacion-campo">
+                                <h3>Por alta dilación - Campo</h3>
 
-
+                                <div class="plantilla">
+                                    <p id="texto-plantilla">
+                                        <b>MESA MULTISKILL HITSS</b><br>
+                                        RECHAZO EN MESA / CAMPO:&nbsp;RECHAZADO EN CAMPO<br>
+                                        PERSONA QUE CONTESTA:&nbsp;<br>
+                                        NUMERO DE CONTACTO:&nbsp;<br>
+                                        MOTIVO DEL RECHAZO:&nbsp;FACILIDADES TÉCNICAS DEL CLIENTE<br>
+                                        SUBMOTIVO DE RECHAZO:&nbsp;(Escoger 1 opción)<br>
+                                        * Dueño de Casa y/o Edificio no autoriza la instalacion.<br>
+                                        Al momento de la instalación no hay acceso al techo<br>
+                                        * Cliente solicita visita en fecha lejana<br>
+                                        ID DE LLAMADA:&nbsp;<br>
+                                        REALIZADO POR:&nbsp;<span class="adp"></span> - ADP MULTISKILL HITSS
+                                    </p>
+                                    <div class="copiar-contenedor">
+                                        <span class="copy-icon" onclick="copiarPlantilla(this)">
+                                            <span class="material-symbols-outlined"
+                                                style="color: rgb(101, 101, 101);">content_copy</span>
+                                        </span>
+                                        <span class="copiado hidden">Copiado!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -5495,7 +5526,7 @@
         let html = p.innerHTML;
         let subInfo = null;
         html = html.replace(/(PERSONA QUE CONTESTA:)(?:&nbsp;|\s)*(?:TITULAR\/ ?FAMILIAR \+ NOMBRE|NOMBRE)(?=<br)/, "$1&nbsp;");
-        if (plantilla.closest("#rechazos-mesa-campo, #sf-rechazo-dilacion")) {
+        if (plantilla.closest("#rechazos-mesa-campo")) {
             const rxSub = /SUBMOTIVO DE RECHAZO:(?:&nbsp;|\s)*(\([^)]*\))?(?:&nbsp;|\s)*<br>([\s\S]*?)(?=\s*(?:ID DE LLAMADA|PAQUETE INGRESADO|<b>\*\*SE PROCEDE))/;
             const m = rxSub.exec(html);
             if (m) {
